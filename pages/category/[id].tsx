@@ -14,6 +14,9 @@ const CatInner = (props: any) => {
 
     useEffect(() => {
         loadCategories((response: any) => setCategories(response.data));
+        if (id) {
+            setCurrentCategory(id);
+        }
     }, []);
 
     useEffect(() => {
