@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Card, Category, Breadcrumbs } from "../../components";
@@ -47,13 +48,17 @@ const CatInner = (props: any) => {
                     <div className="grid-max">
                         {
                             items.map((i: any, index: any) => {
-                                return <Card 
-                                            title={i.item.nameRu} 
-                                            backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
-                                            price={i.item.price}
-                                            key={index}
-                                            priceSale={`${(i.item.price * 1.1).toFixed(0)}`}
-                                        />
+                                return <Link key={index} href={`/catalog/product/${i.item.id}`}>
+                                            <span>
+                                                <Card 
+                                                    title={i.item.nameRu} 
+                                                    backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
+                                                    price={i.item.price}
+                                                    key={index}
+                                                    priceSale={`${(i.item.price * 1.1).toFixed(0)}`}
+                                                />
+                                            </span>
+                                        </Link>
                             })
                         }
                     </div>

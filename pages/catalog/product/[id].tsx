@@ -33,7 +33,7 @@ const ProductInner = () => {
                         images={item?.itemPhotos}
                         setCurImage={setCurImage}
                         curImage={curImage}
-                        objUrl={item.item.object3d}
+                        objUrl={item?.item.object3d}
                         backgroundImage={`url(${curImage}`} 
                         className="mb-32"
                     />
@@ -131,7 +131,7 @@ const ProductInner = () => {
                         <div className="col-md-4">
                             <div className="product-inner-info">
                                 <div className="about-info d-flex-al-center-space-between mb-12">
-                                    <h1>{item.item.nameRu}</h1>
+                                    <h1>{item?.item?.nameRu}</h1>
                                     <button className="btn btn-auto-link b-none">
                                         <svg height="32" width="32">
                                             <use href={`/images/icons/heart.svg#root`}></use>
@@ -143,7 +143,7 @@ const ProductInner = () => {
                                     <Rate rating={5} />
                                     <ReviewQty num="2" className="active"/>
                                 </div>
-                                <h2 className="mb-32">{item.item.price} ₸</h2>
+                                <h2 className="mb-32">{item?.item?.price} ₸</h2>
                                 <Button iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
                             </div>
                         </div> : null 

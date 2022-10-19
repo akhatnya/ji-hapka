@@ -33,7 +33,7 @@ interface ShowImageProps {
             </div>
             <div className="thumb-image">
                 {
-                    props.images.map((img: any, index: any) => {
+                    props.images?.map((img: any, index: any) => {
                         return <ThumbImage key={index} activeImage={props.curImage === img.photo.url ? "active" : ""} thumbImage={`url(${img.photo.url}`} />
                     })
                 }

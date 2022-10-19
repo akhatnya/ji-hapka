@@ -54,6 +54,7 @@ const Main = () => {
                                                 <Card 
                                                     title={b.item.nameRu}
                                                     key={index}
+                                                    object3d={b.item.object3d}
                                                     backgroundImage={`url(${b?.itemPhotos[0]?.photo.url})`}
                                                     price={b.item.price}
                                                     priceSale={`${(b.item.price * 1.1).toFixed(0)}`}

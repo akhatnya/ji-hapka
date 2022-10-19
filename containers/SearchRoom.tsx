@@ -11,7 +11,7 @@ const SearchRoom = (props: any) => {
                     </div>
                     <div className="search-room-block">
                         {
-                            props.menu.rooms?.map((item: any, index: any) => {
+                            props.menu?.rooms?.map((item: any, index: any) => {
                                 return <div className="popular-cats-img h-400" key={index}>
                                             <img src={item.logoUrl} />
                                             <div className="popular-cats-info">
