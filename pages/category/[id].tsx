@@ -9,14 +9,12 @@ const CatInner = (props: any) => {
     const { id } = router.query;
 
     const [items, setItems]: any = useState([]);
-    const [currentCategory, setCurrentCategory]: any = useState(null);
+    const [currentCategory, setCurrentCategory]: any = useState(id);
     const [categories, setCategories]: any = useState([]);
 
     useEffect(() => {
         loadCategories((response: any) => setCategories(response.data));
-        if (id) {
-            setCurrentCategory(id);
-        }
+        setCurrentCategory(id);
     }, []);
 
     useEffect(() => {
@@ -35,53 +33,29 @@ const CatInner = (props: any) => {
                     <Title24 title="Примерить в комнате" className="mb-32" />
                     <div className="cat-list mb-64">
                         {
-                            categories.map((i: any) => {
+                            categories.map((i: any, index: any) => {
                                 return <Category 
                                             onClick={() => setCurrentCategory(i.category.id)}
                                             className={`${i.category.id}` == currentCategory ? "active" : ""} 
                                             title={i.category.nameRu} 
+                                            key={index + "asd"}
                                             srcImage={i.category.smallLogoUrl} 
                                         />
                             })
                         }
                     </div>
                     <div className="grid-max">
-                        <Card 
-                            title="Журнальный стол Фараон" 
-                            backgroundImage={'url(../images/products/product-1.png'}
-                            price={'4 790'}
-                            priceSale={'6 490'}
-                        />
-                        <Card 
-                            title="Журнальный стол Фараон" 
-                            backgroundImage={'url(../images/products/product-2.png'}
-                            price={'4 790'}
-                            priceSale={'6 490'}
-                        />
-                        <Card 
-                            title="Журнальный стол Фараон" 
-                            backgroundImage={'url(../images/products/product-1.png'}
-                            price={'4 790'}
-                            priceSale={'6 490'}
-                        />
-                        <Card 
-                            title="Журнальный стол Фараон" 
-                            backgroundImage={'url(../images/products/product-2.png'}
-                            price={'4 790'}
-                            priceSale={'6 490'}
-                        />
-                        <Card 
-                            title="Журнальный стол Фараон" 
-                            backgroundImage={'url(../images/products/product-1.png'}
-                            price={'4 790'}
-                            priceSale={'6 490'}
-                        />
-                        <Card 
-                            title="Журнальный стол Фараон" 
-                            backgroundImage={'url(../images/products/product-2.png'}
-                            price={'4 790'}
-                            priceSale={'6 490'}
-                        />
+                        {
+                            items.map((i: any, index: any) => {
+                                return <Card 
+                                            title={i.item.nameRu} 
+                                            backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
+                                            price={i.item.price}
+                                            key={index}
+                                            priceSale={`${(i.item.price * 1.1).toFixed(0)}`}
+                                        />
+                            })
+                        }
                     </div>
                 </div>
             </div>

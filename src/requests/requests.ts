@@ -20,3 +20,7 @@ export const loadItemsByRoomId = async (roomId: any, callback: any) => {
 export const loadMenu = async (callback: any) => {
     return axios.get(url(`/menu`)).then(callback)
 }
+
+export const loadItemDetails = async (itemId: any, callback: any) => {
+    return axios.get(url(`/item/${itemId}`)).then(callback);
+}

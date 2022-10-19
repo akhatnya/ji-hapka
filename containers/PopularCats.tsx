@@ -22,9 +22,9 @@ const PopularCats = (props: any) => {
 
                     <div className="popular-cats-list-block">
                         {
-                            props.menu.categories.map((i: any, index: any) => {
+                            props.menu?.categories?.map((i: any, index: any) => {
                                 return <Link href={`/category/${i.id}`}>
-                                            <div className={`popular-cats-img ${blockClassnames[index].a}`}>
+                                            <div key={index} className={`popular-cats-img ${blockClassnames[index].a}`}>
                                                 <img src={i.logoUrl} />
                                                 <div className="popular-cats-info">
                                                     <Title20 title={i.nameRu} className={blockClassnames[index].b} />

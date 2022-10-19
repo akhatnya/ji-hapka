@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Banner, Card, Category } from "../components";
 import { PopularCats, SearchRoom, ForSellers } from "../containers";
@@ -29,8 +30,10 @@ const Main = () => {
                         <Banner/>
                         <div className="cat-list ptb-64">
                             {
-                                categories.map((i: any) => {
-                                    return <Category num={i.itemsCount} title={i.category.nameRu} srcImage={i.category.smallLogoUrl} />
+                                categories.map((i: any, index: any) => {
+                                    return <Link href={`/category/${i.category.id}`} key={index}>
+                                                <Category num={i.itemsCount} key={index} title={i.category.nameRu} srcImage={i.category.smallLogoUrl} />
+                                            </Link>
                                 })
                             }
                         </div>
@@ -46,13 +49,16 @@ const Main = () => {
                         <Title24 title="Хиты продаж" className="mb-32" />
                         <div className="grid-max">
                             {
-                                bestsellers.map((b: any) => {
-                                    return <Card 
-                                                title={b.item.nameRu}
-                                                backgroundImage={`url(${b?.itemPhotos[0]?.photo.url})`}
-                                                price={b.item.price}
-                                                priceSale={`${(b.item.price * 1.1).toFixed(0)}`}
-                                            />  
+                                bestsellers.map((b: any, index: any) => {
+                                    return <Link key={index} href={`/catalog/product/${b.item.id}`}><span>
+                                                <Card 
+                                                    title={b.item.nameRu}
+                                                    key={index}
+                                                    backgroundImage={`url(${b?.itemPhotos[0]?.photo.url})`}
+                                                    price={b.item.price}
+                                                    priceSale={`${(b.item.price * 1.1).toFixed(0)}`}
+                                                />  </span>
+                                            </Link>
                                 })
                             }
                         </div>
@@ -115,7 +121,7 @@ const Main = () => {
             </div>
         </section>
 
-        <SearchRoom />
+        <SearchRoom menu={menu} />
 
         <ForSellers />
 
