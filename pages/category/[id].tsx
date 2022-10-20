@@ -16,6 +16,7 @@ const CatInner = (props: any) => {
     useEffect(() => {
         loadCategories((response: any) => setCategories(response.data));
         setCurrentCategory(id);
+        //eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -24,50 +25,50 @@ const CatInner = (props: any) => {
         }
     }, [currentCategory]);
 
-  return (
-    <div className='page-wrapper'>
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <Breadcrumbs className="pb-24 mb-24"/>
+    return (
+        <div className='page-wrapper'>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <Breadcrumbs className="pb-24 mb-24" />
 
-                    <Title24 title="Примерить в комнате" className="mb-32" />
-                    <div className="cat-list mb-64">
-                        {
-                            categories.map((i: any, index: any) => {
-                                return <Category 
-                                            onClick={() => setCurrentCategory(i.category.id)}
-                                            className={`${i.category.id}` == currentCategory ? "active" : ""} 
-                                            title={i.category.nameRu} 
-                                            key={index + "asd"}
-                                            srcImage={i.category.smallLogoUrl} 
-                                        />
-                            })
-                        }
-                    </div>
-                    <div className="grid-max">
-                        {
-                            items.map((i: any, index: any) => {
-                                return <Link key={index} href={`/catalog/product/${i.item.id}`}>
-                                            <span>
-                                                <Card 
-                                                    title={i.item.nameRu} 
-                                                    backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
-                                                    price={i.item.price}
-                                                    key={index}
-                                                    priceSale={`${(i.item.price * 1.1).toFixed(0)}`}
-                                                />
-                                            </span>
-                                        </Link>
-                            })
-                        }
+                        <Title24 title="Примерить в комнате" className="mb-32" />
+                        <div className="cat-list mb-64">
+                            {
+                                categories.map((i: any, index: any) => {
+                                    return <Category
+                                        onClick={() => setCurrentCategory(i.category.id)}
+                                        className={`${i.category.id}` == currentCategory ? "active" : ""}
+                                        title={i.category.nameRu}
+                                        key={index + "asd"}
+                                        srcImage={i.category.smallLogoUrl}
+                                    />
+                                })
+                            }
+                        </div>
+                        <div className="grid-max">
+                            {
+                                items.map((i: any, index: any) => {
+                                    return <Link key={index} href={`/catalog/product/${i.item.id}`}>
+                                        <span>
+                                            <Card
+                                                title={i.item.nameRu}
+                                                backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
+                                                price={i.item.price}
+                                                key={index}
+                                                priceSale={`${(i.item.price * 1.1).toFixed(0)}`}
+                                            />
+                                        </span>
+                                    </Link>
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-  );
+        </div>
+    );
 }
 
 export default CatInner;

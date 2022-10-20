@@ -6,24 +6,25 @@ interface ButtonProps {
   svgIcon?: string;
   iconRight?: boolean;
   iconLeft?: boolean;
+  onClick?: any
 }
 
 const Button = (props: ButtonProps) => {
-    const { title, className, sizeIcon, svgIcon, iconRight, iconLeft  } = props;
-    
+  const { title, className, sizeIcon, svgIcon, iconRight, iconLeft } = props;
+
   return (
-    <button className={`${className}`}>
+    <button onClick={props.onClick} className={`${className}`}>
       {
-        iconLeft && 
-        <svg viewBox={`0 0 ${sizeIcon} ${sizeIcon}`} style={{width: `${sizeIcon}`}}>
-            <use href={svgIcon}></use>
+        iconLeft &&
+        <svg viewBox={`0 0 ${sizeIcon} ${sizeIcon}`} style={{ width: `${sizeIcon}` }}>
+          <use href={svgIcon}></use>
         </svg>
       }
       {title}
       {
-        iconRight && 
-        <svg viewBox={`0 0 ${sizeIcon} ${sizeIcon}`} style={{width: `${sizeIcon}`}}>
-            <use href={svgIcon}></use>
+        iconRight &&
+        <svg viewBox={`0 0 ${sizeIcon} ${sizeIcon}`} style={{ width: `${sizeIcon}` }}>
+          <use href={svgIcon}></use>
         </svg>
       }
     </button>
