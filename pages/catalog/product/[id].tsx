@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { ShowImage, Breadcrumbs, NavArrow, CardSame, Button, Rate, ReviewQty, ThumbImage, Comment } from "../../../components";
-import { loadItemDetails } from "../../../src/requests/requests";
 import { url } from "../../../src/urls";
-import { Title24, Title20, SubTitle16,  DescriptionInLine } from "../../../Typography";
+import { Title24, Title20, DescriptionInLine } from "../../../Typography";
 
 const ProductInner = (props: any) => {
     const { item }: any = props;
@@ -66,16 +65,6 @@ const ProductInner = (props: any) => {
                                 backgroundImage={'url(../images/products/product-1.png'}
                                 price={'4 790'}
                                 priceSale={'6 490'}
-                            />
-                            <CardSame 
-                                title="Журнальный стол Фараон" 
-                                backgroundImage={'url(../images/products/product-1.png'}
-                                price={'6 790'}
-                            />
-                            <CardSame 
-                                title="Журнальный стол Фараон" 
-                                backgroundImage={'url(../images/products/product-1.png'}
-                                price={'6 790'}
                             />
                             <CardSame 
                                 title="Журнальный стол Фараон" 

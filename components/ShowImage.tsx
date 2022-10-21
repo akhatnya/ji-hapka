@@ -15,7 +15,7 @@ interface ShowImageProps {
             <div className="big-image">
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
                 <div className="action">
-                    <a href="/images/STBEBR001BLU-UK-MDL-CM-USDZ.usdz" className="btn btn-white btn-44">
+                    <a href={props.objUrl} className="btn btn-white btn-44">
                         <svg height="33" width="33">
                             <use href={`/images/icons/AR.svg#root`}></use>
                         </svg>
