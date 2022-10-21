@@ -1,22 +1,16 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ShowImage, Breadcrumbs, NavArrow, CardSame, Button, Rate, ReviewQty, ThumbImage, Comment } from "../../../components";
 import { loadItemDetails } from "../../../src/requests/requests";
+import { url } from "../../../src/urls";
 import { Title24, Title20, SubTitle16,  DescriptionInLine } from "../../../Typography";
 
-const ProductInner = () => {
-    const [item, setItem]: any = useState(null);
+const ProductInner = (props: any) => {
+    const { item }: any = props;
     const [curImage, setCurImage]: any = useState(null);
-    const router = useRouter();
-
-    const { id } = router.query;
 
     useEffect(() => {
-        if (id) {
-            loadItemDetails(id, (res: any) => {
-                setItem(res.data);
-                setCurImage(res.data.itemPhotos[0].photo.url)
-            })
+        if (item) {
+            setCurImage(item.itemPhotos[0].photo.url)
         }
     }, [])
 
@@ -33,7 +27,7 @@ const ProductInner = () => {
                         images={item?.itemPhotos}
                         setCurImage={setCurImage}
                         curImage={curImage}
-                        objUrl={item?.item.object3d}
+                        objUrl={item.item?.object3d}
                         backgroundImage={`url(${curImage}`} 
                         className="mb-32"
                     />
@@ -153,6 +147,14 @@ const ProductInner = () => {
         </div>
     </div>
   );
+}
+
+export const getServerSideProps = async (context: any) => {
+    return {
+        props: {
+            item: await (await fetch(url(`/item/${context.query.id}`))).json()
+        }
+    }
 }
 
 export default ProductInner;
