@@ -20,6 +20,9 @@
     --opacity-all: 0.6;
 }
 
+html {
+  overflow-x: hidden;
+}
 *,
 *::before,
 *::after {
@@ -1562,7 +1565,7 @@ p {
 }
 .cat-list .cat-tab {
     display: grid;
-    align-content: center;
+    align-content: flex-start;
     justify-content: center;
     text-align: center;
     width: 150px;
@@ -1571,6 +1574,12 @@ p {
     grid-gap: 12px;
     transition: .3s;
     cursor: pointer;
+}
+.cat-list .cat-tab img {
+  width: 86px;
+  height: 86px;
+  object-fit: contain;
+  margin: auto;
 }
 .cat-list .cat-tab .cat-text {
   font-weight: 500;
@@ -1779,7 +1788,7 @@ p {
 .big-image .img {
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   position: absolute;
   margin: auto;
   top: 0;

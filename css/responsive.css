@@ -3,6 +3,16 @@
     body {
         overflow-x: hidden;
     }
+    .mv-btn {
+        display: inline-flex;
+    }
+    .dv-btn {
+        display: none;
+    }
+    .btn-auto-link {
+        font-size: 14px;
+        font-weight: 500;
+    }
     .logotype {
         margin: auto;
         display: flex;
@@ -273,9 +283,130 @@
     }
 
 
+    .product-grid-block {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-areas: 
+        "a"
+        "b"
+        "c";
+        padding: 0;
+    }
 
 
 
+    .product-inner-info {
+        padding-left: 0px;
+        margin-bottom: 32px;
+    }
+    .product-inner-info .about-info h1 {
+        font-weight: 500;
+        font-size: 20px;
+    }
+    .product-inner-info .d-flex-al-center-space-between {
+        align-items: flex-start;
+    }
+    .product-inner-info .mb-24 {
+        margin-bottom: 16px;
+    }
+    .product-inner-info h2 {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+    .product-inner-desc .h3-title {
+        font-weight: 600;
+    }
+    .product-inner-desc .card-same, .product-inner .card-same {
+        flex: 0 0 70%;
+    }
+    .card-same .btn {
+        display: none;
+    }
+    .product-inner {
+        margin-bottom: 32px;
+    }
+    .product-inner-desc .rate-review .star-votes svg, .product-inner-desc .comments-block .sv-24 .star-votes svg {
+        width: 16px;
+        height: 16px;
+    }
+    .product-inner-desc .rate-review {
+        margin-bottom: 24px;
+    }
+    .product-inner-desc .rate-review .h2-title {
+        margin: 0;
+        font-size: 20px;
+    }
+    .product-inner-desc .rate-review .review-qty {
+        font-size: 16px;
+    }
+    .comment-list:first-child {
+        margin-top: 0;
+        padding-top: 0;
+        border: none;
+        margin-bottom: 24px;
+    }
+    .comment-list {
+        margin-top: 24px;
+        padding-top: 24px;
+    }
+    .comment-list .subtitle-16.mb-12 {
+        margin-bottom: 8px;
+        margin-top: 16px;
+    }
+    .card-same .image-card .favorite svg {
+        width: 24px;
+        height: 24px;
+    }
+    .image-full-show {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        flex-wrap: nowrap;
+        align-items: center;
+        overflow-x: auto;
+    }
+    .big-image {
+        width: 100%;
+        flex: 0 0 90%;
+    }
+    .big-image::before {
+        content: none;
+    }
+    .big-image .img {
+        position: relative;
+        height: 250px;
+        background-size: contain;
+    }
+    .thumb-image {
+        overflow-x: unset;
+        padding-bottom: 16px;
+        flex: 0 0 90%;
+    }
+    .thumb-image .img.active {
+        border: none;
+    }
+    .thumb-image .img {
+        flex: 0 0 90%;
+        width: 100%;
+        height: 250px;
+        background-size: 80%;
+    }
+
+    
+    .page-404 .page-404-inner img {
+        width: 128px;
+        height: 128px;
+        margin-bottom: 0px;
+    }
+    .page-404 .page-404-inner .h2-title {
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    .page-404 .page-404-inner .h2-title.mb-32 {
+        margin-bottom: 24px;
+    }
 
 
     .sidebar {
@@ -309,5 +440,76 @@
         flex-shrink: 0;
         pointer-events: none;
     }
-    
+
+    .seller-card {
+        margin: 24px 0 32px;
+        padding: 24px;
+        flex-wrap: wrap;
+    }
+    .seller-card-left {
+        margin-bottom: 16px;
+    }
+    .premium-active {
+        flex-wrap: wrap;
+        grid-gap: 8px;
+    }
+    .seller-card-left .text .h3-title, .seller-card-right .seller-rate .h2-title {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .seller-card-left .text .subtitle-16 {
+        font-weight: 400;
+        font-size: 12px;
+    }
+    .seller-card-left .text {
+        width: calc(100% - 64px);
+        margin-left: 16px;
+        grid-gap: 8px;
+    }
+    .seller-card-left .img-seller-card {
+        width: 48px;
+        height: 48px;
+    }
+    .seller-card-right .seller-rate.sv-24 .star-votes svg {
+        width: 20px;
+        height: 20px;
+    }
+    .seller-card-right .seller-rate {
+        grid-gap: 12px;
+        justify-content: flex-start;
+    }
+    .seller-card-right .desc-seller {
+        text-align: left;
+        margin-left: 0;
+        width: auto;
+    }
+    .tab-seller .tabs {
+        grid-gap: 32px;
+    }
+
+    .seller-contact-block .seller-address {
+        flex-wrap: wrap;
+    }
+    .seller-contact-block .seller-address .left, .seller-contact-block .seller-address .right {
+        width: 100%;
+    }
+    .seller-contact-block .seller-address {
+        grid-gap: 16px;
+    }
+    .seller-address-list.mv-btn {
+        display: block;
+    }
+    .seller-contact-block .seller-address:first-child {
+        margin-bottom: 24px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #E1E3E8;
+    }
+    .seller-products-block .image-card .actions .favorite svg, .seller-products-block .image-card .actions .favorite {
+        width: 18px;
+        height: 18px;
+    }
+    .content-seller .thumb-image .img {
+        flex: 0 0 30%;
+        height: 82px;
+    }
 }

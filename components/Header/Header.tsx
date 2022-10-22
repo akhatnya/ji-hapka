@@ -14,7 +14,7 @@ const Header = () => {
                 </div>
             </div>
             <div className="col-center">
-                <a href="#" className="logotype">
+                <a href="/" className="logotype">
                     <svg viewBox="0 0 40 35">
                         <use href='/images/logo/logo.svg#logo'></use>
                     </svg>
