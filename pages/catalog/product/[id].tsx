@@ -1,19 +1,22 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { ShowImage, Breadcrumbs, NavArrow, CardSame, Button, Rate, ReviewQty, ThumbImage, Comment } from "../../../components";
+import { ShowImage, Breadcrumbs, NavArrow, CardSame, Button, Rate, ReviewQty, ThumbImage, Comment, Quantity } from "../../../components";
 import { loadItemDetails } from "../../../src/requests/requests";
 import { url } from "../../../src/urls";
 import { Title24, Title20, SubTitle16,  DescriptionInLine } from "../../../Typography";
 
 const ProductInner = (props: any) => {
-    const { item }: any = props;
+    const { item, basket, setBasket }: any = props;
     const [curImage, setCurImage]: any = useState(null);
-
     useEffect(() => {
         if (item) {
             setCurImage(item.itemPhotos[0].photo.url)
         }
     }, [])
+
+    const handleItem = (product: any) => {
+       
+    }
 
   return (
     <div className='page-wrapper'>
@@ -55,7 +58,9 @@ const ProductInner = (props: any) => {
                                         <ReviewQty num="2" className="active"/>
                                     </div>
                                     <h2 className="mb-32">{item?.item?.price} ₸</h2>
-                                    <Button iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
+                                    <Button onClick={() => {
+                                        handleItem(item);
+                                    }} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
                                 </div>
                             </div> : null 
                         }

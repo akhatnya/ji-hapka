@@ -6,9 +6,12 @@ import { AddCommentInner } from "../containers";
 
 interface SideBarProps {
     className: string;
+    setOpen: () => void;
+    basket: any;
+    setBasket: () => void;
 }
 const SideBar  = (props: SideBarProps) => {
-    const { className } = props;
+    const { className, setOpen, basket, setBasket } = props;
   return (
     <div  className={`sidebar ${className}`}>
 
@@ -16,14 +19,14 @@ const SideBar  = (props: SideBarProps) => {
 
             <div className="sidebar-header mb-24">
                 <Title20 title="Товар в корзине" className=""/>
-                <button className="btn-close">
+                <button onClick={setOpen} className="btn-close">
                     <svg height="24" width="24">
                         <use href={`/images/icons/Close_S.svg#root`}></use>
                     </svg>
                 </button>
             </div>
             
-            <AddCommentInner />
+            <AddCommentInner basket={basket} setBasket={setBasket} />
             
             {/* <div className="sidebar-body "> */}
 

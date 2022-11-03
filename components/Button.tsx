@@ -6,13 +6,14 @@ interface ButtonProps {
   svgIcon?: string;
   iconRight?: boolean;
   iconLeft?: boolean;
+  onClick?: () => void;
 }
 
 const Button = (props: ButtonProps) => {
-    const { title, className, sizeIcon, svgIcon, iconRight, iconLeft  } = props;
+    const { title, className, sizeIcon, svgIcon, iconRight, iconLeft, onClick  } = props;
     
   return (
-    <button className={`${className}`}>
+    <button onClick={onClick ? () => onClick() : () => {}} className={`${className}`}>
       {
         iconLeft && 
         <svg viewBox={`0 0 ${sizeIcon} ${sizeIcon}`} style={{width: `${sizeIcon}`}}>

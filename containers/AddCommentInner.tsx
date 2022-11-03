@@ -1,22 +1,33 @@
 
-import { Button, TextArea, Rate, Input } from "../components";
+import { Button, TextArea, Rate, Input, Quantity } from "../components";
 import { Title20, Title16, SubTitle16 } from "../Typography";
 
-const AddCommentInner  = () => {
-    
+const AddCommentInner  = (props: any) => {
+const { basket, setBasket } = props;
+{ /* Need to restyle this block */}
   return (
     <div className="sidebar-body">
         
-        <div className="comment-product">
-            
-            <div className="img-comment-product" style={{ backgroundImage: "url(../images/products/product-2.png" }}></div>
-            <div className="text-comment-product">
-                <Title16 title="Диван Лофт" className=""/>
-                <SubTitle16 title="Диван угловой Лофт" className=""/>
-            </div>
-        </div>
+        {
+            basket.map((item: any, index: any) => {
+                return (
+                    <div className="comment-product">
+                        <div className="img-comment-product" style={{ backgroundImage: `url(${item.itemPhotos[0].photo.url})` }}></div>
+                            <div className="text-comment-product">
+                                <div key={index}>
+                                    <SubTitle16 title="Диван угловой Лофт" className=""/>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                    <Title16 title={`${item.item.price} тг`} className=""/>
+                                    <Quantity title="1" className="" setBasket={setBasket} />
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                )
+            })
+        }
 
-        <div className="rate-product mb-32 sv-24">
+        {/* <div className="rate-product mb-32 sv-24">
             <Title16 title="Оцените товар" className="mb-12"/>
             <Rate rating={3} />
         </div>
@@ -38,9 +49,10 @@ const AddCommentInner  = () => {
                 className=""
                 title="Телефон"
             />
-        </div>
+        </div> */}
 
-        <Button title="Отправить" className="btn btn-primary w-100 btn-48" />
+        <Button title="Оформить заказ" className="btn btn-primary w-100 btn-48" />
+        <Button title="Продолжить покупки" className="btn w-100 btn-48" />
 
         {/* <div className="comment-added-send">
 

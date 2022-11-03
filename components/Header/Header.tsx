@@ -1,5 +1,7 @@
 
-const Header = () => {
+const Header = (props: any) => {
+
+  const {basket, setOpen, open} = props;
 
   return (
 
@@ -27,11 +29,11 @@ const Header = () => {
                         <use href='/images/icons/heart.svg#root'></use>
                     </svg>
                 </a>
-                <a href="#" className="btn btn-auto-link b-none cart-basket">
+                <a onClick={() => {setOpen(!open)}} href="#" className="btn btn-auto-link b-none cart-basket">
                     <svg height="32" width="32">
                         <use href='/images/icons/cart.svg#root'></use>
                     </svg>
-                    <span className="qty-basket">123</span>
+                    <span className="qty-basket">{basket.length > 0 ? basket.length : 0}</span>
                 </a>
             </div>
         </div>
