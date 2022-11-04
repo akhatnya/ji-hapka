@@ -1,5 +1,7 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 interface ButtonProps {
+  onClick?: () => void;
   title: string;
   className: string;
   sizeIcon?: string;
@@ -9,10 +11,10 @@ interface ButtonProps {
 }
 
 const Button = (props: ButtonProps) => {
-    const { title, className, sizeIcon, svgIcon, iconRight, iconLeft  } = props;
+    const { onClick, title, className, sizeIcon, svgIcon, iconRight, iconLeft  } = props;
     
   return (
-    <button className={`${className}`}>
+    <button onClick={onClick ? () => onClick() : () => {}} className={`${className}`}>
       {
         iconLeft && 
         <svg viewBox={`0 0 ${sizeIcon} ${sizeIcon}`} style={{width: `${sizeIcon}`}}>
@@ -30,4 +32,4 @@ const Button = (props: ButtonProps) => {
   );
 }
 
-export default Button;
+export default observer(Button);

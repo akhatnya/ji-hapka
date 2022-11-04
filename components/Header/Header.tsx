@@ -1,6 +1,9 @@
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { useBasketStore } from "../../providers/RootStoreProvider";
 
 const Header = () => {
-
+  const store = useBasketStore();
   return (
 
     <header className="header pt-64 mb-24">
@@ -27,11 +30,13 @@ const Header = () => {
                         <use href='/images/icons/heart.svg#root'></use>
                     </svg>
                 </a>
-                <a href="#" className="btn btn-auto-link b-none cart-basket">
+                <a href="#" onClick={() => store.setBasket()} className="btn btn-auto-link b-none cart-basket">
                     <svg height="32" width="32">
                         <use href='/images/icons/cart.svg#root'></use>
                     </svg>
-                    <span className="qty-basket">123</span>
+                    <span className="qty-basket">
+                        {store.quantity}
+                    </span>
                 </a>
             </div>
         </div>
@@ -40,4 +45,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default observer(Header);

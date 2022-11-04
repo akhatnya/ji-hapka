@@ -4,12 +4,17 @@ import '../css/responsive.css';
 import type { AppProps } from 'next/app'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
+import { RootStoreProvider } from '../providers/RootStoreProvider';
+import Basket from './Basket';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (<>
+  return (
+    <RootStoreProvider>
         <Header />
+        <Basket />
         <Component {...pageProps} />
         <Footer />
-    </>)
+    </RootStoreProvider>
+  )
 }
 export default MyApp

@@ -1,12 +1,16 @@
 
+import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Banner, Card, Category } from "../components";
 import { PopularCats, SearchRoom, ForSellers } from "../containers";
+import { useBasketStore } from "../providers/RootStoreProvider";
 import { loadBestsellers, loadCategories, loadMenu } from "../src/requests/requests";
 import { SubTitle16, Title24 } from "../Typography";
 
+
 const Main = () => {
+    const store = useBasketStore();
     const [categories, setCategories]: any = useState([]);
     const [bestsellers, setBestsellers]: any = useState([]);
     const [menu, setMenu]: any = useState({
@@ -15,6 +19,7 @@ const Main = () => {
     });
 
     useEffect(() => {
+        store.loadCookies();
         loadCategories((response: any) => setCategories(response.data));
         loadBestsellers((response: any) => setBestsellers(response.data));
         loadMenu((response: any) => setMenu(response.data));
@@ -45,21 +50,23 @@ const Main = () => {
         <section className="sale-hit pb-64">
             <div className="container">
                 <div className="row">
-                    <div className="col-md-12">
+                    <div onClick={() => store.saveBasketInCookie()} className="col-md-12">
                         <Title24 title="Хиты продаж" className="mb-32" />
                         <div className="grid-max">
                             {
                                 bestsellers.map((b: any, index: any) => {
-                                    return <Link key={index} href={`/catalog/product/${b.item.id}`}><span>
+                                    return <span>
                                                 <Card 
+                                                    store={store}
+                                                    item={b}
                                                     title={b.item.nameRu}
                                                     key={index}
                                                     object3d={b.item.object3d}
                                                     backgroundImage={`url(${b?.itemPhotos[0]?.photo.url})`}
                                                     price={b.item.price}
                                                     priceSale={`${(b.item.price * 1.1).toFixed(0)}`}
-                                                />  </span>
-                                            </Link>
+                                                    href={`/catalog/product/${b.item.id}`}
+                                                /></span>
                                 })
                             }
                         </div>
@@ -142,5 +149,5 @@ Jihaz запустился в 2022 году. Сегодня у нас на пл�
   );
 }
 
-export default Main;
+export default observer(Main);
 
