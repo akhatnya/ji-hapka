@@ -32,6 +32,7 @@ import Cookies from 'universal-cookie';
     isBasketOpen: boolean = false;
     quantity: number = 0;
     oldBasket: any = [];
+    test: any = 0;
 
     constructor(root: RootStore) {
       this.root = root;
@@ -43,7 +44,8 @@ import Cookies from 'universal-cookie';
         setBasket: action,
         deleteJihaz: action,
         quantity: observable,
-        saveBasketInCookie: action
+        saveBasketInCookie: action,
+        getBasketSize: action
       });
     }
 
@@ -123,13 +125,13 @@ import Cookies from 'universal-cookie';
     }
 
 
-    // getBasketSize () {                 !!!! need to check this out, cuz it way more better that i'm using
-    //  if(this.basket.length === 0){
-    //   return 0;
-    //  } else {
-    //   for(const value of this.basket){
-    //     this.quantity+= value.quantity
-    //   }
-    //  }
-    // }
+    getBasketSize () {                // !!!! need to check this out, cuz it way more better that i'm using
+     if(this.basket.length === 0){
+      return 0;
+     } else {
+      for(const value of this.basket){
+        this.test += value.quantity
+      }
+     }
+    }
 }

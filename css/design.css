@@ -866,7 +866,19 @@ p {
 /* Header */
 .header {
   padding: 8px 0;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background: white;
+  transition-property: all; 
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
 }
+
+.down {
+  top: -100px;
+}
+
 .row-header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
