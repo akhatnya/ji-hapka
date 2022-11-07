@@ -9,7 +9,7 @@ interface CardProps {
   price: string;
   rating?: number;
   ratingCount?: number;
-  href: string;
+  href?: string;
   item: any;
   store: any;
 }
@@ -57,7 +57,7 @@ const Card  = (props: any) => {
             </div>
             </Link>
             <div className="btn-action">
-                <Button onClick={() => store.addJihaz(item)} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
+                <Button onClick={() => {store.addJihaz(item); store.setBasket()}} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
             </div>
         </div>
     </div>

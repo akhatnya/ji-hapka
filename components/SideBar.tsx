@@ -12,7 +12,7 @@ interface SideBarProps {
 const SideBar  = (props: SideBarProps) => {
     const { className, store } = props;
   return (
-    <div  className={`sidebar ${className}`}>
+    <div style={{zIndex: 2}}  className={`sidebar ${className}`}>
 
         <div className="sidebar-inner">
 

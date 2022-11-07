@@ -118,7 +118,7 @@ import Cookies from 'universal-cookie';
       }
     }
 
-    setBasket () {
+    setBasket (con: boolean = this.isBasketOpen) {
       this.isBasketOpen = !this.isBasketOpen;
     }
 

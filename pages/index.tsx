@@ -35,10 +35,16 @@ const Main = () => {
                         <Banner/>
                         <div className="cat-list ptb-64">
                             {
-                                categories.map((i: any, index: any) => {
-                                    return <Link href={`/category/${i.category.id}`} key={index}>
-                                                <Category num={i.itemsCount} key={index} title={i.category.nameRu} srcImage={i.category.smallLogoUrl} />
+                             categories.map((i: any, index: any) => {
+                                    return (
+                                        <Link href={`/category/${i.category.id}`} key={index}>
+                                                 <Category 
+                                                 num={i.itemsCount} 
+                                                 key={index} 
+                                                 title={i.category.nameRu} 
+                                                 srcImage={i.category.smallLogoUrl} />
                                             </Link>
+                                    )
                                 })
                             }
                         </div>

@@ -57,7 +57,7 @@ const ProductInner = (props: any) => {
                                         <ReviewQty num="2" className="active"/>
                                     </div>
                                     <h2 className="mb-32">{item?.item?.price} ₸</h2>
-                                    <Button onClick={() => {store.addJihaz(item)}} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
+                                    <Button onClick={() => {store.addJihaz(item); store.setBasket()}} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
                                 </div>
                             </div> : null 
                         }
