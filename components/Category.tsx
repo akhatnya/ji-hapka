@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 
 interface CatProps {
@@ -17,4 +18,4 @@ const Category  = (props: CatProps) => {
   );
 }
 
-export default Category;
+export default observer(Category);

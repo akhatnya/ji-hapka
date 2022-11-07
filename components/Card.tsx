@@ -1,4 +1,7 @@
+import { observer } from "mobx-react-lite";
+import Link from "next/link";
 import { Rate, Button, ReviewQty } from "../components";
+import { useBasketStore } from "../providers/RootStoreProvider";
 interface CardProps {
   title: string;
   backgroundImage: string;
@@ -6,12 +9,16 @@ interface CardProps {
   price: string;
   rating?: number;
   ratingCount?: number;
+  href?: string;
+  item: any;
+  store: any;
 }
 const Card  = (props: any) => {
-  const { title, backgroundImage, price, priceSale  } = props;
+  const { href, title, backgroundImage, price, priceSale, item, store  } = props;
   return (
     
     <div className="card">
+     <Link href={href}>
         <div className="image-card">
             <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
             <div className="actions">
@@ -31,7 +38,9 @@ const Card  = (props: any) => {
                 </div>
             </div>
         </div>
+        </Link>
         <div className="text-card">
+            <Link href={href}>
             <div className="info">
                 <h3>{title}</h3>
                 <div className="price">
@@ -46,8 +55,9 @@ const Card  = (props: any) => {
                     </div> : null 
                 }
             </div>
+            </Link>
             <div className="btn-action">
-                <Button iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
+                <Button onClick={() => {store.addJihaz(item); store.setBasket()}} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
             </div>
         </div>
     </div>
@@ -55,4 +65,4 @@ const Card  = (props: any) => {
   );
 }
 
-export default Card;
+export default observer(Card);

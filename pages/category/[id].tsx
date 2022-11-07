@@ -1,13 +1,15 @@
-import Link from "next/link";
+import { observer } from "mobx-react-lite";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Card, Category, Breadcrumbs } from "../../components";
+import { useBasketStore } from "../../providers/RootStoreProvider";
 import { loadCategories, loadItemsByCategoryId } from "../../src/requests/requests";
 import { Title24 } from "../../Typography";
 
 const CatInner = (props: any) => {
     const router = useRouter();
     const { id } = router.query;
+    const store = useBasketStore();
 
     const [items, setItems]: any = useState([]);
     const [currentCategory, setCurrentCategory]: any = useState(id);
@@ -47,10 +49,14 @@ const CatInner = (props: any) => {
                     </div>
                     <div className="grid-max">
                         {
-                            items.map((i: any, index: any) => {
-                                return <Link key={index} href={`/catalog/product/${i.item.id}`}>
+                            items?.map((i: any, index: any) => {
+                                return (
                                             <span>
                                                 <Card 
+                                                    store={store}
+                                                    item={i}
+                                                    href={`/catalog/product/${i.item.id}`}
+                                                    index={index}
                                                     title={i.item.nameRu} 
                                                     backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
                                                     price={i.item.price}
@@ -58,7 +64,7 @@ const CatInner = (props: any) => {
                                                     priceSale={`${(i.item.price * 1.1).toFixed(0)}`}
                                                 />
                                             </span>
-                                        </Link>
+                                )
                             })
                         }
                     </div>
@@ -70,4 +76,4 @@ const CatInner = (props: any) => {
   );
 }
 
-export default CatInner;
+export default observer(CatInner);

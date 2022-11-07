@@ -2,28 +2,30 @@ import React from "react";
 import { BasketList, Button, NavArrow, CardSame } from "../components";
 import { Title20, SubTitle16 } from "../Typography";
 import { AddCommentInner } from "../containers";
+import { observer } from "mobx-react-lite";
 
 
 interface SideBarProps {
     className: string;
+    store: any;
 }
 const SideBar  = (props: SideBarProps) => {
-    const { className } = props;
+    const { className, store } = props;
   return (
-    <div  className={`sidebar ${className}`}>
+    <div className={`sidebar ${className}`}>
 
         <div className="sidebar-inner">
 
             <div className="sidebar-header mb-24">
                 <Title20 title="Товар в корзине" className=""/>
-                <button className="btn-close">
+                <button onClick={() => store.setBasket()} className="btn-close">
                     <svg height="24" width="24">
                         <use href={`/images/icons/Close_S.svg#root`}></use>
                     </svg>
                 </button>
             </div>
             
-            <AddCommentInner />
+            <AddCommentInner store={store} />
             
             {/* <div className="sidebar-body "> */}
 
@@ -102,4 +104,4 @@ const SideBar  = (props: SideBarProps) => {
   );
 }
 
-export default SideBar;
+export default observer(SideBar);
