@@ -87,37 +87,6 @@ const ProductInner = (props: any) => {
                                 : null }
                             </div>
 
-                            <div className="d-flex-al-center-space-between mb-32">
-                                <Title20 title="Похожие товары" className=""/>
-                                <NavArrow/>
-                            </div>
-                            <div className="same-products product-inner mb-64">
-                                <div className="same-products-inner">
-                                    {/* Надо убрать PriceSale полностью если нет цены акционной */}
-                                    <CardSame 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-1.png'}
-                                        price={'4 790'}
-                                        priceSale={'6 490'}
-                                    />
-                                    <CardSame 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-1.png'}
-                                        price={'6 790'}
-                                    />
-                                    <CardSame 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-1.png'}
-                                        price={'6 790'}
-                                    />
-                                    <CardSame 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-1.png'}
-                                        price={'6 790'}
-                                    />
-                                </div>
-                            </div>
-
                             <div className="d-flex-al-center-space-between mb-24">
                                 <Title20 title="Отзывы" className=""/>
                                 <Button title="Оставить отзыв" className="btn btn-secondary btn-48" />
