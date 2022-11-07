@@ -137,7 +137,7 @@ const Main = () => {
 
         <SearchRoom menu={menu} />
 
-        <ForSellers />
+        {/* <ForSellers /> */}
 
         <section className="jihhaz-app mb-64">
             <div className="container">
