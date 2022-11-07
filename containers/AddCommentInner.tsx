@@ -51,7 +51,7 @@ const AddCommentInner  = ({store}: any) => {
         </div> */}
 
         <Button title="Оформить заказ" className="btn btn-primary w-100 btn-48" />
-        <Button title="Продолжить покупки" className="btn w-100 btn-48" />
+        <Button onClick={() => {store.setBasket(false)}} title="Продолжить покупки" className="btn w-100 btn-48" />
 
         {/* <div className="comment-added-send">
             <img src="images/icons/hand-up-big.svg" />

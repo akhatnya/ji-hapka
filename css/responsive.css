@@ -1,7 +1,7 @@
 
 @media (max-width: 767px) {
     body {
-        overflow-x: hidden;
+        
     }
     .mv-btn {
         display: inline-flex;
@@ -379,7 +379,7 @@
         background-size: contain;
     }
     .thumb-image {
-        overflow-x: unset;
+        overflow-x: hidden;
         padding-bottom: 16px;
         flex: 0 0 90%;
     }
