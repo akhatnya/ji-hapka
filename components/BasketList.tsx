@@ -1,4 +1,6 @@
+import { observer } from "mobx-react-lite";
 import { Quantity, Button } from "../components";
+import React from 'react';
 interface BasketListProps {
     title: string;
     price: string;
@@ -6,9 +8,11 @@ interface BasketListProps {
     className: string;
     inRight: boolean;
     inBlock: boolean;
+    item: any;
+    store: any;
   }
 const BasketList  = (props: BasketListProps) => {
-    const { title, price, backgroundImage, className, inRight, inBlock } = props;
+    const {store, item, title, price, backgroundImage, className, inRight, inBlock } = props;
   return (
     <div  className={`basket-list ${className}`}>
         
@@ -19,12 +23,12 @@ const BasketList  = (props: BasketListProps) => {
             <span className="text">{title}</span>
             <div className="price-quantity">
                 <span className="price">{price} ₸</span>
-                <Quantity title="3" className="" />
+                <Quantity store={store} jihaz={item} title={item.quantity} className="" />
             </div>
             {
               inRight && 
               <div className="add-btns-inner">
-                <Button iconLeft={true} sizeIcon="16" svgIcon="/images/icons/trash-16.svg#root" title="Удалить" className="btn btn-secondary-hb third-color btn-32" />
+                <Button onClick={() => {store.deleteAllJihazType(item.id)}} iconLeft={true} sizeIcon="16" svgIcon="/images/icons/trash-16.svg#root" title="Удалить" className="btn btn-secondary-hb third-color btn-32" />
                 <Button iconLeft={true} sizeIcon="16" svgIcon="/images/icons/heart-16.svg#root" title="Добавить в избранное" className="btn btn-secondary-hb btn-32" />
               </div>
             }
@@ -42,4 +46,4 @@ const BasketList  = (props: BasketListProps) => {
   );
 }
 
-export default BasketList;
+export default observer(BasketList);

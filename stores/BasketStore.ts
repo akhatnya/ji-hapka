@@ -1,9 +1,8 @@
-import { url } from '../src/urls';
 import {
     action,
     makeObservable,
     observable,
-    toJS
+    toJS,
   } from "mobx";
 import Cookies from 'universal-cookie';
   import { RootStore } from "./RootStore";
@@ -32,7 +31,7 @@ import Cookies from 'universal-cookie';
     isBasketOpen: boolean = false;
     quantity: number = 0;
     oldBasket: any = [];
-    test: any = 0;
+    price: number = 0;
 
     constructor(root: RootStore) {
       this.root = root;
@@ -45,7 +44,9 @@ import Cookies from 'universal-cookie';
         deleteJihaz: action,
         quantity: observable,
         saveBasketInCookie: action,
-        getBasketSize: action
+        getBasketSize: action,
+        getPrice: action,
+        deleteAllJihazType: action
       });
     }
 
@@ -53,14 +54,10 @@ import Cookies from 'universal-cookie';
       if(cookie.get('basket')) {
         this.basket = cookie.get('basket')
       };
-      if(cookie.get('quantity')){
-        this.quantity = Number(cookie.get('quantity'))
-      } ;
     }
 
     saveBasketInCookie() {
       cookie.set('basket', this.basket, {expires: new Date('2030-12-17T03:24:00'), path: '/'})
-      cookie.set('quantity', this.quantity, {expires: new Date('2030-12-17T03:24:00'), path: '/'})
     }
 
     addFirstJihaz (jihaz: any){
@@ -81,9 +78,19 @@ import Cookies from 'universal-cookie';
       this.saveBasketInCookie()
     }
 
+    deleteAllJihazType (jihazId: number) {
+      let jihazFound = this.basket.findIndex((item: any) => item.id === jihazId);
+      if(jihazFound === undefined){
+        throw new Error('No Jihaz to be Deleted')
+      } else {
+        console.log(jihazFound)
+        this.basket.splice(jihazFound, 1);
+        this.saveBasketInCookie()
+        }
+    }
+
     deleteJihaz (jihaz: any) {
-      if(this.quantity != 0){
-        this.quantity = this.quantity - 1
+      if(this.getBasketSize() != 0){
         this.saveBasketInCookie()
       }
       let jihazId = this.basket.findIndex((item: any) => item.id === jihaz.id);
@@ -104,7 +111,6 @@ import Cookies from 'universal-cookie';
     }
 
     addJihaz (jihaz: any) {
-      this.quantity = this.quantity + 1
       this.saveBasketInCookie()
       let jihazFound = this.basket.find((item: any) => item.id === jihaz.item.id);
       if(jihazFound === undefined){
@@ -124,14 +130,19 @@ import Cookies from 'universal-cookie';
       this.isBasketOpen = !this.isBasketOpen;
     }
 
-
-    getBasketSize () {                // !!!! need to check this out, cuz it way more better that i'm using
-     if(this.basket.length === 0){
-      return 0;
-     } else {
-      for(const value of this.basket){
-        this.test += value.quantity
+    getBasketSize () {        
+      let size = 0;
+      for(let i = 0; i < this.basket.length; i++){
+        size = this.basket[i].quantity + size;
       }
-     }
+      return size
+    }
+
+    getPrice () {
+      let sum = 0;
+      for(let i = 0; i < this.basket.length; i++) {
+        sum = (this.basket[i].quantity * this.basket[i].item.price) + sum;
+      }
+      return sum;
     }
 }
