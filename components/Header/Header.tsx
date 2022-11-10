@@ -34,7 +34,7 @@ const Header = () => {
                         <use href='/images/icons/cart.svg#root'></use>
                     </svg>
                     <span className="qty-basket">
-                        {store.quantity}
+                        {store.getBasketSize()}
                     </span>
                 </a>
             </div>

@@ -19,7 +19,6 @@ const Main = () => {
     });
 
     useEffect(() => {
-        store.loadCookies();
         loadCategories((response: any) => setCategories(response.data));
         loadBestsellers((response: any) => setBestsellers(response.data));
         loadMenu((response: any) => setMenu(response.data));

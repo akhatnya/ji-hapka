@@ -45,3 +45,7 @@ function initializeStore(): RootStore {
 
   return _store;
 }
+
+export function getCookie() {
+  return store.basketStore.loadCookies();
+}

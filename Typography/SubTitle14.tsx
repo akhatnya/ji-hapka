@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 
 interface TitleProps {
     title: string;
@@ -12,5 +13,5 @@ interface TitleProps {
     );
   }
   
-  export default SubTitle14;
+  export default observer(SubTitle14);
   

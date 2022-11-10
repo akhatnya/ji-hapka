@@ -7,9 +7,12 @@ interface RadioProps {
     title: string;
     classActive: string;
     svgIcon: string;
+    value?: any;
+    checked?: any
+    onChange?: any
 }
 const RadioButton  = (props: RadioProps) => {
-    const { type, name, labelId, className, title, classActive, svgIcon } = props;
+    const {onChange, value, type, name, labelId, className, title, classActive, svgIcon, checked } = props;
     
   return (
     <div className={`radio-default ${className}`}>
@@ -17,6 +20,9 @@ const RadioButton  = (props: RadioProps) => {
         type={type}
         id={labelId}
         name={name}
+        value={value}
+        checked={checked}
+        onChange={onChange}
         />
         
         <label htmlFor={labelId}>

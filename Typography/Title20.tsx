@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 
 interface TitleProps {
   title: string;
@@ -12,4 +13,4 @@ const Title20  = (props: TitleProps) => {
   );
 }
 
-export default Title20;
+export default observer(Title20);
