@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Title24 } from "../Typography";
 
 const SearchRoom = (props: any) => {
@@ -12,12 +13,14 @@ const SearchRoom = (props: any) => {
                     <div className="search-room-block">
                         {
                             props.menu?.rooms?.map((item: any, index: any) => {
-                                return <div className="popular-cats-img h-400" key={index}>
-                                            <img src={item.logoUrl} />
-                                            <div className="popular-cats-info">
-                                                <h2 className="title-32 mb-8">{item.nameRu}</h2>
+                                return <Link href={`/room/${item.id}`}>
+                                            <div className="popular-cats-img h-400" key={index}>
+                                                <img src={item.logoUrl} />
+                                                <div className="popular-cats-info">
+                                                    <h2 className="title-32 mb-8">{item.nameRu}</h2>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Link>
                             })
                         }
                     </div>

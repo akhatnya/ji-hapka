@@ -18,9 +18,10 @@ const Card  = (props: any) => {
   return (
     
     <div className="card">
-     <Link href={href}>
         <div className="image-card">
-            <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
+            <Link href={href}>
+                <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
+            </Link>
             <div className="actions">
                 <div className="favorite">
                     <svg height="32" width="32">
@@ -38,7 +39,6 @@ const Card  = (props: any) => {
                 </div>
             </div>
         </div>
-        </Link>
         <div className="text-card">
             <Link href={href}>
             <div className="info">
