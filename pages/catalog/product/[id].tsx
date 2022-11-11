@@ -45,7 +45,7 @@ const ProductInner = (props: any) => {
                                 <div className="product-inner-info">
                                     <div className="about-info d-flex-al-center-space-between mb-12">
                                         <h1>{item?.item?.nameRu}</h1>
-                                        <button className="btn btn-auto-link b-none">
+                                        <button onClick={() => {store.addFavorite(item)}} className="btn btn-auto-link b-none">
                                             <svg height="32" width="32">
                                                 <use href={`/images/icons/heart.svg#root`}></use>
                                             </svg>
@@ -86,6 +86,7 @@ const ProductInner = (props: any) => {
                                 <DescriptionInLine rateActive={true} rateNum={5} link={item.shopInfo.name} title="Продавец" description="" className="mb-16" />
                                 : null }
                             </div>
+
 
                             <div className="d-flex-al-center-space-between mb-24">
                                 <Title20 title="Отзывы" className=""/>

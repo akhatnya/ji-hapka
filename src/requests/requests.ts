@@ -28,3 +28,7 @@ export const loadMenu = async (callback: any) => {
 export const loadItemDetails = async (itemId: any, callback: any) => {
     return axios.get(url(`/item/${itemId}`)).then(callback);
 }
+
+export const sendOrder = async (form: any, callback: any) => {
+    return axios.post(url(`/api/v1/order/create`), form).then(callback).catch((err: any) => {})
+}

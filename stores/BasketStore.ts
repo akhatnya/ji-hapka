@@ -22,6 +22,20 @@ import Cookies from 'universal-cookie';
     quantity: number;
   }
 
+  interface Favorite {
+    id: number;
+    item: {
+      nameRu: string;
+      price: number;
+      id: number;
+    };
+    itemPhotos: [{
+      photo: {
+        url: string
+      }
+      }];
+  }
+
   const cookie = new Cookies();
   
   export class BasketStore {
@@ -32,12 +46,15 @@ import Cookies from 'universal-cookie';
     quantity: number = 0;
     oldBasket: any = [];
     price: number = 0;
+    favorites: Array<Favorite> = [];
+    isFavOpen: boolean = false;
 
     constructor(root: RootStore) {
       this.root = root;
       makeObservable(this, {
         initialData: observable,
         basket: observable,
+        isFavOpen: observable,
         addJihaz: action,
         isBasketOpen: observable,
         setBasket: action,
@@ -46,18 +63,70 @@ import Cookies from 'universal-cookie';
         saveBasketInCookie: action,
         getBasketSize: action,
         getPrice: action,
-        deleteAllJihazType: action
+        deleteAllJihazType: action,
+        saveFavInCookie: action,
+        addFavorite: action,
+        deleteFavorite: action,
       });
     }
 
+
+    addFavorite(item: any) {
+      let jihazFound = this.favorites.find((i: any) => i.id === item.item.id);
+      console.log(jihazFound, 'favorites')
+      if(jihazFound === undefined){
+        this.favorites.push({
+          id: item.item.id,
+          item: {
+            id: item.item.id,
+            nameRu: item.item.nameRu, 
+            price: item.item.price
+          },
+          itemPhotos: [
+            {photo:
+               {url: item.itemPhotos[0].photo.url}
+            }
+          ],
+        });
+        console.log(this.favorites, 'favorites')
+        this.saveFavInCookie();
+      }
+    }
+
+    deleteFavorite(itemId: any) {
+      let jihazFound = this.favorites.findIndex((i: any) => i.id === itemId);
+      if(jihazFound === undefined){
+        throw new Error('No jihaz found')
+      } else {
+        this.favorites.splice(jihazFound, 1);
+        this.saveFavInCookie();
+      }
+    }
+
+    setFav () {
+      this.isFavOpen = !this.isFavOpen;
+    }
+    
+
    async loadCookies () {
       if(cookie.get('basket')) {
-        this.basket = cookie.get('basket')
+        this.basket = cookie.get('basket');
       };
+      if(cookie.get('fav')) {
+        this.favorites = cookie.get('fav');
+      }
+    }
+
+    saveFavInCookie() {
+      cookie.set('fav', this.favorites, {expires: new Date('2030-12-17'), path: '/'});
     }
 
     saveBasketInCookie() {
       cookie.set('basket', this.basket, {expires: new Date('2030-12-17T03:24:00'), path: '/'})
+    }
+
+    clearBasket(){
+      cookie.set('basket', []);
     }
 
     addFirstJihaz (jihaz: any){

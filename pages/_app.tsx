@@ -9,6 +9,7 @@ import Basket from './Basket';
 import { observer } from 'mobx-react-lite';
 import {useEffect} from 'react';
 import { useRouter } from 'next/router';
+import Favorite from './Favorite';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <RootStoreProvider>
         <Header />
         <Basket />
+        <Favorite />
         <Component {...pageProps} />
         {
           router.pathname !== "/order" && (
