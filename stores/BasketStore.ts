@@ -57,6 +57,7 @@ import Cookies from 'universal-cookie';
         isFavOpen: observable,
         addJihaz: action,
         isBasketOpen: observable,
+        favorites: observable,
         setBasket: action,
         deleteJihaz: action,
         quantity: observable,
