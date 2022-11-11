@@ -26,7 +26,7 @@ const Input  = (props: InputProps) => {
           name={name}
           value={value}
           onChange={onChange}
-          mask={'+7 (999) 999 - 99 - 99'}
+          mask={'7 (999) 999 - 99 - 99'}
           className='forms-control'
           placeholder={placeholder} />
         </div>

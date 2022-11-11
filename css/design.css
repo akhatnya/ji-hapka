@@ -1331,10 +1331,10 @@ p {
     grid-gap: 12px;
     margin-bottom: 12px;
 }
-.text-card .info .price .primary-price {
+.primary-price {
     color: var(--primary-text-color);
 }
-.text-card .info .price .sale-price {
+ .sale-price {
     text-decoration-line: line-through;
     color: var(--secondary-text-color);
 }

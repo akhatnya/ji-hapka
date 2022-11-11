@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import { Rate, Button, ReviewQty } from "../components";
-import { useBasketStore } from "../providers/RootStoreProvider";
+
 interface CardProps {
   title: string;
   backgroundImage: string;
@@ -16,16 +16,15 @@ interface CardProps {
 const Card  = (props: any) => {
   const { href, title, backgroundImage, price, priceSale, item, store  } = props;
   return (
-    
     <div className="card">
         <div className="image-card">
             <Link href={href}>
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
             </Link>
             <div className="actions">
-                <div className="favorite">
-                    <svg height="32" width="32">
-                        <use href={`/images/icons/heart.svg#root`}></use>
+                <div onClick={() => {store.addFavorite(item)}} className="favorite">
+                    <svg height="32" width="32"> 
+                                <use href={`/images/icons/heart.svg#root`}></use>
                     </svg>
                 </div>
                 <div className="btn-3d">

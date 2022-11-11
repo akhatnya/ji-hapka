@@ -24,7 +24,7 @@ const Header = () => {
                
             </div>
             <div className="col-right">
-                <a href="#" className="btn btn-auto-link b-none">
+                <a onClick={() => store.setFav()} href="#" className="btn btn-auto-link b-none">
                     <svg height="32" width="32">
                         <use href='/images/icons/heart.svg#root'></use>
                     </svg>
