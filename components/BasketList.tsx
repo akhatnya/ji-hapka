@@ -41,7 +41,7 @@ const BasketList  = (props: BasketListProps) => {
           inBlock && 
           <div className="add-btns-inner">
             <Button onClick={() => {store.deleteFavorite(item.id)}} iconLeft={true} sizeIcon="16" svgIcon="/images/icons/trash-16.svg#root" title="Удалить" className="btn btn-secondary-hb third-color btn-40" />
-            <Button iconLeft={true} sizeIcon="24" svgIcon="/images/icons/cart-badge-plus-24.svg#root" title="Добавить в корзину" className="btn btn-secondary-hb btn-40" />
+            <Button onClick={() => {store.addJihaz(item), store.setFav(), store.setBasket()}} iconLeft={true} sizeIcon="24" svgIcon="/images/icons/cart-badge-plus-24.svg#root" title="Добавить в корзину" className="btn btn-secondary-hb btn-40" />
           </div>
         }
         </div>

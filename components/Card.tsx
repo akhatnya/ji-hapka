@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Rate, Button, ReviewQty } from "../components";
 
 interface CardProps {
@@ -15,6 +16,10 @@ interface CardProps {
 }
 const Card  = (props: any) => {
   const { href, title, backgroundImage, price, priceSale, item, store  } = props;
+  const [obj, setObj]: any = useState(null);
+  useEffect(() => {
+    setObj(store.favorites.find((i: any) => {return i.id === item.item.id}))
+  }, [obj])
   return (
     <div className="card">
         <div className="image-card">
@@ -22,11 +27,21 @@ const Card  = (props: any) => {
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
             </Link>
             <div className="actions">
-                <div onClick={() => {store.addFavorite(item)}} className="favorite">
-                    <svg height="32" width="32"> 
-                                <use href={`/images/icons/heart.svg#root`}></use>
-                    </svg>
+                {
+                    store.favorites?.length === 0 ? (
+                        <div onClick={() => {store.addFavorite(item)}} className="favorite">
+                            <svg height="32" width="32"> 
+                                        <use href={`/images/icons/heart.svg#root`}></use>
+                            </svg>
                 </div>
+                    ) : (
+                        <div onClick={() => {store.addFavorite(item)}} className="favorite">
+                            <svg height="32" width="32"> 
+                                        <use style={{color: obj ? 'red' : 'black'}} href={`/images/icons/heart.svg#root`}></use>
+                            </svg>
+                        </div>
+                    )
+                }
                 <div className="btn-3d">
                     
                     <a href={props?.object3d} className="btn btn-white btn-44">
