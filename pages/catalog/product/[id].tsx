@@ -89,7 +89,7 @@ const ProductInner = (props: any) => {
                             </div>
 
 
-                            <div className="d-flex-al-center-space-between mb-24">
+                            {/* <div className="d-flex-al-center-space-between mb-24">
                                 <Title20 title="Отзывы" className=""/>
                                 <Button title="Оставить отзыв" className="btn btn-secondary btn-48" />
                             </div>
@@ -121,7 +121,7 @@ const ProductInner = (props: any) => {
                                     Прекрасный диван! Заказывала в ткани Formula 494. 
                                     Изначально были сомнения на счет терракотового цвета, боялась, чтобы оттенок не был с рыжим оттенком. Но цвет оказался очень приятным, теплым и удачно вписался в интерьер. Диван очень комфортный для сидения и для сна. " 
                                 />
-                            </div>
+                            </div> */}
                         </div>
                         
                     </div>
