@@ -3,6 +3,7 @@ import { BasketList, Button, NavArrow, CardSame } from "../components";
 import { Title20, SubTitle16 } from "../Typography";
 import { AddCommentInner } from "../containers";
 import { observer } from "mobx-react-lite";
+import { kzt } from "../utils/globalUtils";
 
 
 interface SideBarProps {
@@ -55,7 +56,7 @@ const SideBar  = (props: SideBarProps) => {
                 </div>
                 <div className="basket-total">
                     <span className="text">Итого 1 товар <br/> на сумму</span>
-                    <span className="total-price h3-title">99 000 ₸</span>
+                    <span className="total-price h3-title">{kzt(99000)</span>
                 </div>
 
                 <div className="basket-btns mb-40">

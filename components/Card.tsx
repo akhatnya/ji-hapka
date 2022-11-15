@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Rate, Button, ReviewQty } from "../components";
+import { kzt } from "../utils/globalUtils";
 
 interface CardProps {
   title: string;
@@ -58,8 +59,8 @@ const Card  = (props: any) => {
             <div className="info">
                 <h3>{title}</h3>
                 <div className="price">
-                    <span className="primary-price">{price} ₸</span>
-                    <span className="sale-price">{priceSale} ₸</span>
+                    <span className="primary-price">{kzt(price)}</span>
+                    <span className="sale-price">{kzt(priceSale)}</span>
                 </div>
                 {
                     props.rating ? 

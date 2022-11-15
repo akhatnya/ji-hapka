@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { Quantity, Button } from "../components";
 import React from 'react';
+import { kzt } from "../utils/globalUtils";
+
 interface BasketListProps {
     title: string;
     price: string;
@@ -23,7 +25,7 @@ const BasketList  = (props: BasketListProps) => {
         <div className="basket-right">
             <span className="text">{title}</span>
             <div className="price-quantity">
-                <span className="price">{price} ₸</span>
+                <span className="price">{kzt(price)}</span>
                 {
                   !fav && (
                     <Quantity store={store} jihaz={item} title={item.quantity} className="" />

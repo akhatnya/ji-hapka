@@ -3,6 +3,7 @@ import { Button, TextArea, Rate, Input, Quantity } from "../components";
 import { Title20, Title16, SubTitle16, Title24 } from "../Typography";
 import styles from '../styles/AddCommentInner.module.css';
 import { useRouter } from "next/router";
+import { kzt } from "../utils/globalUtils";
 
 const AddCommentInner  = ({store}: any) => {
 { /* Need to restyle this block */}
@@ -39,7 +40,7 @@ const AddCommentInner  = ({store}: any) => {
                         Итого {store.getBasketSize()} товар на сумму
                         </span>
                         <span style={{fontSize: '20px', fontWeight: '700'}}>
-                        {store.getPrice()} ₸
+                        {kzt(store.getPrice())}
                         </span>
                     </div>
                     <Button onClick={() => {store.setBasket(false); router.push('/order')}} title="Оформить заказ" className="btn btn-primary w-100 btn-48" />

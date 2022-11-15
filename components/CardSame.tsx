@@ -1,5 +1,6 @@
 
 import { Rate, Button } from "../components";
+import { kzt } from "../utils/globalUtils";
 interface CardProps {
   title: string;
   backgroundImage: string;
@@ -26,8 +27,8 @@ const CardSame  = (props: CardProps) => {
             <div className="info">
                 <h3>{title}</h3>
                 <div className="price">
-                    <span className="primary-price">{price} ₸</span>
-                    <span className="sale-price">{priceSale} ₸</span>
+                    <span className="primary-price">{kzt(price)}</span>
+                    <span className="sale-price">{kzt(priceSale)}</span>
                 </div>
                 <Button iconLeft={false} sizeIcon="16" svgIcon="/images/icons/check-16.svg#root" title="Добавить" className="btn btn-secondary w-100 btn-36" />
             </div>

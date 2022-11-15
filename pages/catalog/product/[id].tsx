@@ -6,6 +6,7 @@ import { useBasketStore } from "../../../providers/RootStoreProvider";
 import { loadItemDetails } from "../../../src/requests/requests";
 import { url } from "../../../src/urls";
 import { Title24, Title20, SubTitle16,  DescriptionInLine } from "../../../Typography";
+import { kzt } from "../../../utils/globalUtils";
 
 const ProductInner = (props: any) => {
     const store = useBasketStore();
@@ -56,7 +57,7 @@ const ProductInner = (props: any) => {
                                         <Rate rating={5} />
                                         <ReviewQty num="2" className="active"/>
                                     </div>
-                                    <h2 className="mb-32">{item?.item?.price} ₸</h2>
+                                    <h2 className="mb-32">{kzt(item?.item?.price)}</h2>
                                     <Button onClick={() => {store.addJihaz(item); store.setBasket()}} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
                                 </div>
                             </div> : null 

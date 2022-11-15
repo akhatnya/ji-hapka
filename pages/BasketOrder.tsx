@@ -4,6 +4,7 @@ import { Title24, Title20, Title16, SubTitle16, SubTitle14 } from "../Typography
 import { useState } from 'react';
 import { sendOrder } from "../src/requests/requests";
 import { useRouter } from "next/router";
+import { kzt } from "../utils/globalUtils";
 
 const BasketOrder  = ({store}: any) => {
 
@@ -137,7 +138,7 @@ const BasketOrder  = ({store}: any) => {
                                     <>
                                         <SubTitle14 title={`Итого ${store.getBasketSize()} товара на сумму`} className=""/>
                                         <div className="price">
-                                        <span className="primary-price">{Math.floor(store.getPrice() * 0.95)} ₸</span> <span className="sale-price">{store.getPrice()} ₸</span>
+                                        <span className="primary-price">{kzt(store.getPrice() * 0.95)}</span> <span className="sale-price">{kzt(store.getPrice())}</span>
                                         </div>
                                     </>
                                 )
