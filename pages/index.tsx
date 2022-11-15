@@ -68,8 +68,8 @@ const Main = () => {
                                                     key={index}
                                                     object3d={b.item.object3d}
                                                     backgroundImage={`url(${b?.itemPhotos[0]?.photo.url})`}
-                                                    price={b.item.price}
-                                                    priceSale={b.item.price * 1.05}
+                                                    price={b.item.price * 0.95}
+                                                    priceSale={b.item.price}
                                                     href={`/catalog/product/${b.item.id}`}
                                                 /></span>
                                 })
