@@ -137,9 +137,13 @@ const BasketOrder  = ({store}: any) => {
                             {
                                 store.basket.length !== 0 && (
                                     <>
-                                        <SubTitle14 title={`Итого ${store.getBasketSize()} товара на сумму`} className=""/>
+                                        <div className="item-and-sale">
+                                            <SubTitle14 title={`Итого ${store.getBasketSize()} товара на сумму`} className=""/>
+                                            <span className="sale-percent">5% скидка</span>
+                                        </div>
                                         <div className="price">
-                                        <span className="primary-price">{kzt(store.getPrice() * 0.95)}</span> <span className="sale-price">{kzt(store.getPrice())}</span>
+                                            <span className="primary-price">{kzt(store.getPrice() * 0.95)}</span>
+                                            <span className="sale-price">{kzt(store.getPrice())}</span>
                                         </div>
                                     </>
                                 )

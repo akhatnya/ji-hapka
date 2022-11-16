@@ -603,4 +603,14 @@
         position: absolute;
         right: -32px;
     }
+    .footer-order .price {
+        display: grid;
+        position: relative;
+    }
+    .footer-order .sale-percent {
+        display: block;
+        font-weight: 400;
+        font-size: 12px;
+        color: green;
+    }
 }

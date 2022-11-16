@@ -2044,6 +2044,9 @@ p {
 .btn-order-apply {
   display: none;
 }
+.sale-percent {
+  display: none;
+}
 
 /* ------------------------ Всегда ниже всех стилей ------------------------ */
 
