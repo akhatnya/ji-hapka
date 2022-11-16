@@ -27,31 +27,29 @@ const Card  = (props: any) => {
             <Link href={href}>
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
             </Link>
-            <div className="actions">
-                {
-                    store.favorites?.length === 0 ? (
-                        <div onClick={() => {store.addFavorite(item)}} className="favorite">
-                            <svg height="32" width="32"> 
-                                        <use href={`/images/icons/heart.svg#root`}></use>
-                            </svg>
-                </div>
-                    ) : (
-                        <div onClick={() => {store.addFavorite(item)}} className="favorite">
-                            <svg height="32" width="32"> 
-                                        <use style={{color: obj ? 'red' : 'black'}} href={`/images/icons/heart.svg#root`}></use>
-                            </svg>
-                        </div>
-                    )
-                }
-                <div className="btn-3d">
-                    
-                    <a href={props?.object3d} className="btn btn-white btn-44">
-                        <svg height="33" width="33">
-                            <use href={`/images/icons/AR.svg#root`}></use>
+            {
+                store.favorites?.length === 0 ? (
+                    <div onClick={() => {store.addFavorite(item)}} className="favorite">
+                        <svg height="32" width="32"> 
+                                    <use href={`/images/icons/heart.svg#root`}></use>
                         </svg>
-                        Примерить в комнате
-                    </a>
-                </div>
+            </div>
+                ) : (
+                    <div onClick={() => {store.addFavorite(item)}} className="favorite">
+                        <svg height="32" width="32"> 
+                                    <use style={{color: obj ? 'red' : 'black'}} href={`/images/icons/heart.svg#root`}></use>
+                        </svg>
+                    </div>
+                )
+            }
+            <div className="btn-3d">
+                
+                <a href={props?.object3d} className="btn btn-white btn-44">
+                    <svg height="33" width="33">
+                        <use href={`/images/icons/AR.svg#root`}></use>
+                    </svg>
+                    Примерить в комнате
+                </a>
             </div>
         </div>
         <div className="text-card">

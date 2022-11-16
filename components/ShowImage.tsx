@@ -30,6 +30,19 @@ interface ShowImageProps {
                     </a> */}
                 </div>
 
+                <div className="frst-time-modal">
+
+                    <div className="frst-time-modal-inner">
+
+                        <Title20 title="Примерьте эту мебель у себя в комнате" className="" />
+                        <svg height="24" width="24">
+                            <use href={`/images/icons/close-24-current.svg#root`}></use>
+                        </svg>
+
+                    </div>
+
+                </div>
+
                     
             </div>
             <div className="thumb-image">

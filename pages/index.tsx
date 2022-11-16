@@ -60,7 +60,7 @@ const Main = () => {
                         <div className="grid-max">
                             {
                                 bestsellers.map((b: any, index: any) => {
-                                    return <span>
+                                    return <div className="card-span">
                                                 <Card 
                                                     store={store}
                                                     item={b}
@@ -71,7 +71,7 @@ const Main = () => {
                                                     price={b.item.price * 0.95}
                                                     priceSale={b.item.price}
                                                     href={`/catalog/product/${b.item.id}`}
-                                                /></span>
+                                                /></div>
                                 })
                             }
                         </div>

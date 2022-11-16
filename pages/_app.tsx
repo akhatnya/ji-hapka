@@ -10,6 +10,7 @@ import {useEffect} from 'react';
 import { useRouter } from 'next/router';
 import Favorite from './Favorite';
 import { getCookie, RootStoreProvider } from '../providers/RootStoreProvider';
+import Submit from './Submit';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -21,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header />
         <Basket />
         <Favorite />
+        <Submit />
         <Component {...pageProps} />
         {
           router.pathname !== "/order" && (

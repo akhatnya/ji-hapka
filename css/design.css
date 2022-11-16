@@ -878,6 +878,9 @@ p {
 .down {
   top: -100px;
 }
+.page-wrapper {
+  min-height: 80vh;
+}
 
 .row-header {
   display: grid;
@@ -1281,14 +1284,14 @@ p {
     height: 60%;
     width: 80%;
 }
-.image-card .actions {
+/* .image-card .actions {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-}
-.image-card .actions .favorite {
+} */
+.image-card .favorite {
     position: absolute;
     top: 16px;
     right: 16px;
@@ -1299,11 +1302,11 @@ p {
     color: var(--primary-text-color);
     transition: .3s;
 }
-.image-card .actions .favorite svg {
+.image-card .favorite svg {
     transform: scale(1);
     transition: .3s ease-in-out;
 }
-.image-card .actions .btn-3d { 
+.image-card .btn-3d { 
     position: absolute;
     bottom: 8px;
     left: 8px;
@@ -1352,13 +1355,13 @@ p {
     background-color: var(--white-color);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
 }
-.card:hover .image-card .actions .btn-3d {
+.card:hover .image-card .btn-3d {
     opacity: 1;
 }
-.card:hover .image-card .actions .favorite {
+.card:hover .image-card .favorite {
     background-color: var(--white-color);
 }
-.card:hover .image-card .actions .favorite svg {
+.card:hover .image-card .favorite svg {
     transform: scale(1.1);
 }
 
@@ -1875,12 +1878,22 @@ p {
   max-width: 480px;
   width: 100%;
   height: 100%;
-  transform: translateX(150%);
   transition: .3s;
 }
+
 .sidebar.active {
-  transform: translateX(0);
+  animation: flipRight .3s alternate ;
 }
+@keyframes flipRight {
+  from {
+    transform: translateX(150%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+
 .sidebar .sidebar-inner {
   position: relative;
   padding: 40px 32px;
@@ -2010,6 +2023,9 @@ p {
   font-size: 24px;
 }
 
+.frst-time-modal {
+  display: none;
+}
 
 .bckdrp {
   display: none;
@@ -2024,6 +2040,9 @@ p {
 .bckdrp.show {
   display: block;
   opacity: 0.7;
+}
+.btn-order-apply {
+  display: none;
 }
 
 /* ------------------------ Всегда ниже всех стилей ------------------------ */

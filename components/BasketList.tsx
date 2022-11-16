@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { Quantity, Button } from "../components";
 import React from 'react';
 import { kzt } from "../utils/globalUtils";
-
+import  { isMobile } from 'react-device-detect';
 interface BasketListProps {
     title: string;
     price: string;
@@ -35,7 +35,9 @@ const BasketList  = (props: BasketListProps) => {
             {
               inRight && 
               <div className="add-btns-inner">
-                <Button onClick={() => {store.deleteAllJihazType(item.id)}} iconLeft={true} sizeIcon="16" svgIcon="/images/icons/trash-16.svg#root" title="Удалить" className="btn btn-secondary-hb third-color btn-32" />
+                    <Button onClick={() => {store.deleteAllJihazType(item.id)}} iconLeft={true} sizeIcon="16" svgIcon="/images/icons/trash-16.svg#root"
+                      title={ !isMobile ? "Удалить" : ""}
+                      className="btn btn-secondary-hb third-color btn-32" />
                 <Button iconLeft={true} sizeIcon="16" svgIcon="/images/icons/heart-16.svg#root" title="Добавить в избранное" className="btn btn-secondary-hb btn-32" />
               </div>
             }

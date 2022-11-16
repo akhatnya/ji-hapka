@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { sendOrder } from "../src/requests/requests";
 import { useRouter } from "next/router";
 import { kzt } from "../utils/globalUtils";
+import  { isMobile } from 'react-device-detect';
 
 const BasketOrder  = ({store}: any) => {
 
@@ -89,7 +90,7 @@ const BasketOrder  = ({store}: any) => {
                     </div>
                 </div>
             ) : (
-                    store.basket.length !== 0 && (
+                    store.basket.length !== 0 && !isMobile && (
                         <div className="side-order">
                             <div className="side-order-inner">
         
@@ -128,7 +129,7 @@ const BasketOrder  = ({store}: any) => {
                     )
             )
         }
-        <div className="footer-order">
+        <div className="footer-order mb-64">
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
@@ -146,8 +147,11 @@ const BasketOrder  = ({store}: any) => {
                         </div>
                     </div>
                 </div>
+                <Button onClick={() => { store.setSubmit()}} title="Оформить заказ" className="btn btn-primary w-100 btn-48 mb-16 btn-order-apply" />
             </div>
         </div>
+
+
     </div>
   );
 }

@@ -48,11 +48,13 @@ import Cookies from 'universal-cookie';
     price: number = 0;
     favorites: Array<Favorite> = [];
     isFavOpen: boolean = false;
+    isSubmit: boolean = false;
 
     constructor(root: RootStore) {
       this.root = root;
       makeObservable(this, {
         initialData: observable,
+        isSubmit:  observable,
         basket: observable,
         isFavOpen: observable,
         addJihaz: action,
@@ -68,7 +70,12 @@ import Cookies from 'universal-cookie';
         saveFavInCookie: action,
         addFavorite: action,
         deleteFavorite: action,
+        setSubmit: action
       });
+    }
+
+    setSubmit () {
+      this.isSubmit = !this.isSubmit;
     }
 
 
