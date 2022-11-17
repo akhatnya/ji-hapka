@@ -1,22 +1,18 @@
 
+import { useState } from "react";
 import { ThumbImage } from "../components";
 import { Title20 } from "../Typography";
-import { isMobile } from 'react-device-detect'; 
 
-
-interface ShowImageProps {
-    backgroundImage: string;
-    className: string;
-}
-  
-  const ShowImage = (props: any) => {
+const ShowImage = (props: any) => {
     const { backgroundImage, className } = props;
+    const [withMobileModal, setWithMobileModal]: any = useState(props.isMobile);
+
     return (
         <div className={`image-full-show ${className}`}>
             <div className="big-image">
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
                 <div className="action">
-                    <a href={ isMobile ? props.objUrl : null} className="btn btn-white btn-44">
+                    <a href={ props.objUrl } className="btn btn-white btn-44">
                         <svg height="33" width="33">
                             <use href={`/images/icons/AR.svg#root`}></use>
                         </svg>
@@ -30,18 +26,22 @@ interface ShowImageProps {
                     </a> */}
                 </div>
 
-                <div className="frst-time-modal">
+                {
+                    withMobileModal ?
+                        <div className="frst-time-modal">
 
-                    <div className="frst-time-modal-inner">
+                            <div className="frst-time-modal-inner">
 
-                        <Title20 title="Примерьте эту мебель у себя в комнате" className="" />
-                        <svg height="24" width="24">
-                            <use href={`/images/icons/close-24-current.svg#root`}></use>
-                        </svg>
+                                <Title20 title="Примерьте эту мебель у себя в комнате" className="" />
 
-                    </div>
+                                <svg onClick={() => setWithMobileModal(false)} height="24" width="24">
+                                    <use href={`/images/icons/close-24-current.svg#root`}></use>
+                                </svg>
 
-                </div>
+                            </div>
+
+                        </div> : null
+                }
 
                     
             </div>
@@ -54,7 +54,7 @@ interface ShowImageProps {
             </div>
         </div>
     );
-  };
-  
+};
+
   export default ShowImage;
   

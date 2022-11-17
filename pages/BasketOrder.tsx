@@ -6,6 +6,7 @@ import { sendOrder } from "../src/requests/requests";
 import { useRouter } from "next/router";
 import { kzt } from "../utils/globalUtils";
 import  { isMobile } from 'react-device-detect';
+import Link from "next/link";
 
 const BasketOrder  = ({store}: any) => {
 
@@ -21,10 +22,11 @@ const BasketOrder  = ({store}: any) => {
     const [status, setStatus]: any = useState(false);
 
     function handleChange(evt: any) {
-        const value = evt.target.value;
+        const { name, value } = evt.target;
+
         setForm({
           ...form,
-          [evt.target.name]: value
+          [name]: value
         });
       }
 
@@ -85,7 +87,9 @@ const BasketOrder  = ({store}: any) => {
                         <p style={{color: '#051E47', fontSize: '16px'}}>В ближайшее время вам перезвонит менеджердля уточнения деталей</p>
                     </div>
                     <div className="action">
-                        <Button onClick={goShop} title="Продолжить покупки" className="btn btn-primary w-100 btn-48 mb-16" />
+                        <Link href={"/"}>
+                            <Button title="Продолжить покупки" className="btn btn-primary w-100 btn-48 mb-16" />
+                        </Link>
                     </div>
                     </div>
                 </div>
@@ -105,11 +109,15 @@ const BasketOrder  = ({store}: any) => {
         
                                     <Title16 title="Способ доставки" className="mb-24" />
                                     <div className="d-flex-align-center gg-16 mb-32">
-                                        <RadioButton value={1} onChange={handleChange} checked={form.deliveryMethod == 1} title="Курьер" labelId="courier" className="" type="radio" name="deliveryMethod" classActive="" svgIcon="/images/icons/delivery.svg#root"/>
-                                        <RadioButton value={2} onChange={handleChange} checked={form.deliveryMethod == 2} title="Самовывоз" labelId="pickup" className="" type="radio" name="deliveryMethod" classActive="" svgIcon="/images/icons/box.svg#root" />
+                                        <RadioButton value={1} onChange={handleChange} title="Доставка" labelId="courier" className="" type="radio" name="deliveryMethod" classActive="" svgIcon="/images/icons/delivery.svg#root"/>
+                                        <RadioButton value={2} onChange={handleChange} title="Самовывоз" labelId="pickup" className="" type="radio" name="deliveryMethod" classActive="" svgIcon="/images/icons/box.svg#root" />
                                     </div>
-                                    <Input name="address" value={form.address} onChange={handleChange} title="Адрес" placeholder="Город, улица/мкр, дом, этаж, квартира" labelId="address" className="" type="text" />
-        
+
+                                    {
+                                        form.deliveryMethod == 1 ?
+                                            <Input name="address" value={form.address} onChange={handleChange} title="Адрес" placeholder="Город, улица/мкр, дом, этаж, квартира" labelId="address" className="" type="text" />
+                                            : null 
+                                    }
                                     <div className="action">
                                         <Button title="Подтвердить заказ" className="btn btn-primary w-100 btn-48 mb-16" />
                                         <p className="link-agree">Нажимая кнопку (Подтвердить заказ), Вы принимаете условия <a href="#!">Договора оферты</a>, а также даете Согласие на обработку персональных данных.</p>

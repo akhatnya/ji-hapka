@@ -81,7 +81,6 @@ import Cookies from 'universal-cookie';
 
     addFavorite(item: any) {
       let jihazFound = this.favorites.find((i: any) => i.id === item.item.id);
-      console.log(jihazFound, 'favorites')
       if(jihazFound === undefined){
         this.favorites.push({
           id: item.item.id,
@@ -96,7 +95,6 @@ import Cookies from 'universal-cookie';
             }
           ],
         });
-        console.log(this.favorites, 'favorites')
         this.saveFavInCookie();
       }
     }
@@ -160,7 +158,6 @@ import Cookies from 'universal-cookie';
       if(jihazFound === undefined){
         throw new Error('No Jihaz to be Deleted')
       } else {
-        console.log(jihazFound)
         this.basket.splice(jihazFound, 1);
         this.saveBasketInCookie()
         }

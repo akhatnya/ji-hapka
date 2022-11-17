@@ -1,11 +1,9 @@
 import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ShowImage, Breadcrumbs, NavArrow, CardSame, Button, Rate, ReviewQty, ThumbImage, Comment } from "../../../components";
 import { useBasketStore } from "../../../providers/RootStoreProvider";
-import { loadItemDetails } from "../../../src/requests/requests";
 import { url } from "../../../src/urls";
-import { Title24, Title20, SubTitle16,  DescriptionInLine } from "../../../Typography";
+import { Title20, DescriptionInLine } from "../../../Typography";
 import { kzt } from "../../../utils/globalUtils";
 
 const ProductInner = (props: any) => {
@@ -30,10 +28,11 @@ const ProductInner = (props: any) => {
                 <div className="product-grid-block">
                     <div className="col-grid-1">
                         <ShowImage 
+                            isMobile={props.isMobile}
                             images={item?.itemPhotos}
                             setCurImage={setCurImage}
                             curImage={curImage}
-                            objUrl={item?.item.object3d}
+                            objUrl={item.item.object3d}
                             backgroundImage={`url(${curImage}`} 
                             className="mb-32"
                         />

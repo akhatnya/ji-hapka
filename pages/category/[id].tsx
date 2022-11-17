@@ -4,14 +4,16 @@ import React, { useEffect, useState } from "react";
 import { Card, Category, Breadcrumbs } from "../../components";
 import { useBasketStore } from "../../providers/RootStoreProvider";
 import { loadCategories, loadItemsByCategoryId } from "../../src/requests/requests";
+import { url } from "../../src/urls";
 import { Title24 } from "../../Typography";
+import { kzt } from "../../utils/globalUtils";
 
 const CatInner = (props: any) => {
     const router = useRouter();
-    const { id } = router.query;
+    const { id } = props;
     const store = useBasketStore();
 
-    const [items, setItems]: any = useState([]);
+    const [items, setItems]: any = useState(props.items);
     const [currentCategory, setCurrentCategory]: any = useState(id);
     const [categories, setCategories]: any = useState([]);
 
@@ -57,11 +59,12 @@ const CatInner = (props: any) => {
                                                     item={i}
                                                     href={`/catalog/product/${i.item.id}`}
                                                     index={index}
+                                                    object3d={i.item.object3d}
                                                     title={i.item.nameRu} 
                                                     backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
                                                     price={i.item.price}
                                                     key={index}
-                                                    priceSale={`${(i.item.price * 1.1).toFixed(0)}`}
+                                                    priceSale={i.item.price * 0.95}
                                                 />
                                             </span>
                                 )
@@ -74,6 +77,15 @@ const CatInner = (props: any) => {
 
     </div>
   );
+}
+
+export const getServerSideProps = async (context: any) => {
+    return {
+        props: {
+            items: await (await fetch(url(`/items/category/${context.query.id}`))).json(),
+            id: context.query.id
+        }
+    }
 }
 
 export default observer(CatInner);

@@ -12,18 +12,19 @@ import Favorite from './Favorite';
 import { getCookie, RootStoreProvider } from '../providers/RootStoreProvider';
 import Submit from './Submit';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, isMobile }: any) {
   const router = useRouter();
   useEffect(() => {
     getCookie();
   }, [])
+
   return (
     <RootStoreProvider>
         <Header />
         <Basket />
         <Favorite />
         <Submit />
-        <Component {...pageProps} />
+        <Component {...pageProps} isMobile />
         {
           router.pathname !== "/order" && (
             <Footer />
@@ -32,4 +33,23 @@ function MyApp({ Component, pageProps }: AppProps) {
     </RootStoreProvider>
   )
 }
+
+MyApp.getInitialProps = async (appContext: any) => {
+  let isMobile = true;
+
+  if (appContext.ctx.req){
+    const UA = appContext.ctx.req.headers["user-agent"];
+    
+    isMobile = Boolean(
+      UA.match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+      )
+    );
+  }
+
+  return {
+    isMobile
+  }
+}
+
 export default observer(MyApp)
