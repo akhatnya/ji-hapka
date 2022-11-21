@@ -71,7 +71,8 @@ const Main = () => {
                                                     price={b.item.price * 0.95}
                                                     priceSale={b.item.price}
                                                     href={`/catalog/product/${b.item.id}`}
-                                                /></div>
+                                                />
+                                            </div>
                                 })
                             }
                         </div>

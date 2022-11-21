@@ -61,7 +61,7 @@ const CatInner = (props: any) => {
                                                     backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
                                                     price={i.item.price}
                                                     key={index}
-                                                    priceSale={`${(i.item.price * 1.1).toFixed(0)}`}
+                                                    priceSale={i.item.price * 0.95}
                                                 />
                                             </span>
                                 )
