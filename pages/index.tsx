@@ -104,8 +104,8 @@ const Main = () => {
                                 <use href={`/images/icons/WavyCheck.svg#root`}></use>
                             </svg>
                             <div className="advant-text">
-                                <h4>Проверенные продавцы</h4>
-                                <p>Ищите мебель для дома или офиса у проверенных продавцов</p>
+                                <h4>Примерка дома</h4>
+                                <p>Примерьте мебель в комнате не выходя из дома</p>
                             </div>
                         </div>
 
