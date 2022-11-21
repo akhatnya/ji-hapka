@@ -114,9 +114,8 @@ const BasketOrder  = ({store}: any) => {
                                     </div>
 
                                     {
-                                        form.deliveryMethod == 1 ?
+                                        form.deliveryMethod == 1 &&
                                             <Input name="address" value={form.address} onChange={handleChange} title="Адрес" placeholder="Город, улица/мкр, дом, этаж, квартира" labelId="address" className="" type="text" />
-                                            : null 
                                     }
                                     <div className="action">
                                         <Button title="Подтвердить заказ" className="btn btn-primary w-100 btn-48 mb-16" />
