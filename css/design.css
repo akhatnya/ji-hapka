@@ -2047,6 +2047,12 @@ p {
 .sale-percent {
   display: none;
 }
+.btn-ar {
+  position: relative;
+}
+.btn-ar::after {
+  content: "Примерить в комнате";
+}
 
 /* ------------------------ Всегда ниже всех стилей ------------------------ */
 
