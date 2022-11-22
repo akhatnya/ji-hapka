@@ -44,7 +44,7 @@ const Card  = (props: any) => {
             }
             <div className="btn-3d">
                 
-                <a href={props?.object3d} className="btn btn-white btn-44">
+                <a href={props?.object3d} rel="ar" className="btn btn-white btn-44">
                     <svg height="33" width="33">
                         <use href={`/images/icons/AR.svg#root`}></use>
                     </svg>

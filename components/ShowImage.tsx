@@ -12,7 +12,7 @@ const ShowImage = (props: any) => {
             <div className="big-image">
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
                 <div className="action">
-                    <a href={ props.objUrl } className="btn btn-white btn-44">
+                    <a href={ props.objUrl } rel="ar" className="btn btn-white btn-44">
                         <svg height="33" width="33">
                             <use href={`/images/icons/AR.svg#root`}></use>
                         </svg>
