@@ -25,8 +25,9 @@ const Input  = (props: InputProps) => {
           id={labelId}
           name={name}
           value={value}
+          type="phone"
           onChange={onChange}
-          mask={'7 (999) 999 - 99 - 99'}
+          mask='7(999)999-99-99'
           className='forms-control'
           placeholder={placeholder} />
         </div>

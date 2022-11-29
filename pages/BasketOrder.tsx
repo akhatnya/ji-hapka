@@ -14,7 +14,7 @@ const BasketOrder  = ({store}: any) => {
 
     const [form, setForm]: any = useState({
         name: '',
-        phone: '',
+        phone: null,
         deliveryMethod: 1,
         address: ''
     });
@@ -32,10 +32,11 @@ const BasketOrder  = ({store}: any) => {
 
     async function send (e:any) {
         e.preventDefault();
-        const {deliveryMethod} = form;
+        const {deliveryMethod, phone} = form;
         const data = {...form,
              deliveryMethod: Number(deliveryMethod),
-             basket: store.basket
+             basket: store.basket,
+             phone: Number(phone.replace('(', '').replace(')', '').replaceAll('-', ''))
             };
         await sendOrder(data, (res: any) => {
             store.clearBasket();
