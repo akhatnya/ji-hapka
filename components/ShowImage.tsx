@@ -11,14 +11,14 @@ const ShowImage = (props: any) => {
     useEffect(() => {
         setWithMobileModal(props.device.isMobile());
         setIsAndroid(props.device.isAndroid());
-    });
+    }, []);
 
     return (
         <div className={`image-full-show ${className}`}>
             <div className="big-image">
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
                 <div className="action">
-                    <a href={ !isAndroid ? props.objUrl : props.gltfUrl } rel="ar" className="btn btn-white btn-44">
+                    <a href={ !isAndroid ? props.objUrl : `intent://arvr.google.com/scene-viewer/1.0?file=${props.gltfUrl}#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;` } rel="ar" className="btn btn-white btn-44">
                         <svg height="33" width="33">
                             <use href={`/images/icons/AR.svg#root`}></use>
                         </svg>
