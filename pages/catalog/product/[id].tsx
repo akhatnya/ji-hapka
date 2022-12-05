@@ -28,11 +28,12 @@ const ProductInner = (props: any) => {
                 <div className="product-grid-block">
                     <div className="col-grid-1">
                         <ShowImage 
-                            isMobile={props.isMobile}
+                            device={props.device}
                             images={item?.itemPhotos}
                             setCurImage={setCurImage}
                             curImage={curImage}
                             objUrl={item.item.object3d}
+                            gltfUrl={item.item.objectGltf}
                             backgroundImage={`url(${curImage}`} 
                             className="mb-32"
                         />

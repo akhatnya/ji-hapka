@@ -53,15 +53,18 @@ const CatInner = (props: any) => {
                                 return (
                                             <span>
                                                 <Card 
+                                                    device={props.device}
                                                     store={store}
                                                     item={i}
                                                     href={`/catalog/product/${i.item.id}`}
                                                     index={index}
                                                     title={i.item.nameRu} 
+                                                    object3d={i.item.object3d}
+                                                    gltf={i.item.objectGltf}
                                                     backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
-                                                    price={i.item.price}
+                                                    priceSale={i.item.price}
                                                     key={index}
-                                                    priceSale={i.item.price * 0.95}
+                                                    price={i.item.price * 0.95}
                                                 />
                                             </span>
                                 )

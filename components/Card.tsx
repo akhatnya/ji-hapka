@@ -31,21 +31,29 @@ const Card  = (props: any) => {
                 store.favorites?.length === 0 ? (
                     <div onClick={() => {store.addFavorite(item)}} className="favorite">
                         <svg height="32" width="32"> 
-                                    <use href={`/images/icons/heart.svg#root`}></use>
+                            <use href={`/images/icons/heart.svg#root`}></use>
                         </svg>
-            </div>
+                    </div>
                 ) : (
                     <div onClick={() => {store.addFavorite(item)}} className="favorite">
                         <svg height="32" width="32"> 
-                                    <use style={{color: obj ? 'red' : 'black'}} href={`/images/icons/heart.svg#root`}></use>
+                            <use style={{color: obj ? 'red' : 'black'}} href={`/images/icons/heart.svg#root`}></use>
                         </svg>
                     </div>
                 )
             }
             <div className="btn-3d">
                 
+<<<<<<< Updated upstream
                 <a href={props?.object3d} rel="ar" className="btn btn-white btn-44 btn-ar">
                     <img src="images/icons/AR.png" />
+=======
+                <a href={!props.device.isAndroid() ? props?.object3d : props?.objectGltf} rel="ar" className="btn btn-white btn-44">
+                    <svg height="33" width="33">
+                        <use href={`/images/icons/AR.svg#root`}></use>
+                    </svg>
+                    Примерить в комнате
+>>>>>>> Stashed changes
                 </a>
             </div>
         </div>

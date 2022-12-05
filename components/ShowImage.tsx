@@ -1,19 +1,28 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ThumbImage } from "../components";
 import { Title20 } from "../Typography";
 
 const ShowImage = (props: any) => {
     const { backgroundImage, className } = props;
-    const [withMobileModal, setWithMobileModal]: any = useState(props.isMobile);
+    const [withMobileModal, setWithMobileModal]: any = useState(null);
+    const [isAndroid, setIsAndroid]: any = useState(null);
+
+    useEffect(() => {
+        setWithMobileModal(props.device.isMobile());
+        setIsAndroid(props.device.isAndroid());
+    });
 
     return (
         <div className={`image-full-show ${className}`}>
             <div className="big-image">
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
                 <div className="action">
-                    <a href={ props.objUrl } rel="ar" className="btn btn-white btn-44 btn-ar">
-                        <img src="/images/icons/AR.png" />
+                    <a href={ !isAndroid ? props.objUrl : props.gltfUrl } rel="ar" className="btn btn-white btn-44">
+                        <svg height="33" width="33">
+                            <use href={`/images/icons/AR.svg#root`}></use>
+                        </svg>
+                        Примерить в комнате
                     </a>
                     {/* <a href="/images/STBEBR001BLU-UK-MDL-CM-USDZ.usdz" className="btn btn-white btn-44">
                         Закрыть

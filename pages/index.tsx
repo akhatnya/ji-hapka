@@ -7,9 +7,10 @@ import { PopularCats, SearchRoom, ForSellers } from "../containers";
 import { useBasketStore } from "../providers/RootStoreProvider";
 import { loadBestsellers, loadCategories, loadMenu } from "../src/requests/requests";
 import { SubTitle16, Title24 } from "../Typography";
+import useMobileDetect from "../utils/MobileDetect";
 
 
-const Main = () => {
+const Main = (props: any) => {
     const store = useBasketStore();
     const [categories, setCategories]: any = useState([]);
     const [bestsellers, setBestsellers]: any = useState([]);
@@ -26,7 +27,6 @@ const Main = () => {
 
   return (
     <main className='main'>
-
         <section className="main-banner">
             <div className="container">
                 <div className="row">
@@ -62,11 +62,13 @@ const Main = () => {
                                 bestsellers.map((b: any, index: any) => {
                                     return <div className="card-span">
                                                 <Card 
+                                                    device={props.device}
                                                     store={store}
                                                     item={b}
                                                     title={b.item.nameRu}
                                                     key={index}
                                                     object3d={b.item.object3d}
+                                                    gltf={b.item.objectGltf}
                                                     backgroundImage={`url(${b?.itemPhotos[0]?.photo.url})`}
                                                     price={b.item.price * 0.95}
                                                     priceSale={b.item.price}

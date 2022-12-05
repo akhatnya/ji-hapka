@@ -11,9 +11,12 @@ import { useRouter } from 'next/router';
 import Favorite from './Favorite';
 import { getCookie, RootStoreProvider } from '../providers/RootStoreProvider';
 import Submit from './Submit';
+import useMobileDetect from '../utils/MobileDetect';
 
-function MyApp({ Component, pageProps, isMobile }: any) {
+function MyApp({ Component, pageProps }: any) {
   const router = useRouter();
+  let currentDevice = useMobileDetect();
+
   useEffect(() => {
     getCookie();
   }, [])
@@ -24,7 +27,7 @@ function MyApp({ Component, pageProps, isMobile }: any) {
         <Basket />
         <Favorite />
         <Submit />
-        <Component {...pageProps} isMobile />
+        <Component {...pageProps} isMobile={currentDevice.isMobile()} device={currentDevice} />
         {
           router.pathname !== "/order" && (
             <Footer />
@@ -32,24 +35,6 @@ function MyApp({ Component, pageProps, isMobile }: any) {
         }
     </RootStoreProvider>
   )
-}
-
-MyApp.getInitialProps = async (appContext: any) => {
-  let isMobile = true;
-
-  if (appContext.ctx.req){
-    const UA = appContext.ctx.req.headers["user-agent"];
-    
-    isMobile = Boolean(
-      UA.match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-      )
-    );
-  }
-
-  return {
-    isMobile
-  }
 }
 
 export default observer(MyApp)
