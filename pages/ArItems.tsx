@@ -26,6 +26,7 @@ const ArItems = (props: any) => {
                                 return (
                                             <span>
                                                 <Card 
+                                                    device={props.device}
                                                     store={store}
                                                     item={i}
                                                     href={`/catalog/product/${i.item.id}`}
