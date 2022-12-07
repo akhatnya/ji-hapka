@@ -1,6 +1,7 @@
 import { Rate } from "../components";
 
 interface TitleProps {
+    id?: any;
     title: string;
     description: string;
     link: string;
@@ -16,7 +17,7 @@ interface TitleProps {
             <span className="left">{title}</span>
             <span className="right">
                 {description} 
-                <a href="#!" className="btn btn-auto-link">{link}</a>
+                <a href={`/shop/${props.id}`} className="btn btn-auto-link">{link}</a>
                 {
                     rateActive && 
                     <Rate rating={rateNum} />

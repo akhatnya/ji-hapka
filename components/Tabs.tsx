@@ -10,7 +10,7 @@ const Tabs  = (props: TabProps) => {
   return (
     <span className={`tab-link h3-title ${className}`}>
         {title}
-        <span className="num">{num}</span>
+        {/* <span className="num">{num}</span> */}
     </span>
   );
 }

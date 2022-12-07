@@ -1,45 +1,50 @@
-import { BtnBack, Tabs, Category, Button, Rate, GivePremium, Comment } from "../components";
-import { Title24, Title20, Title16, SubTitle16,  SubTitle14 } from "../Typography";
+import { url } from "../../src/urls";
+import { BtnBack, Tabs, Category, Button, Rate, GivePremium, Comment, Card } from "../../components";
+import { Title24, Title20, Title16, SubTitle16,  SubTitle14 } from "../../Typography";
+import { useBasketStore } from "../../providers/RootStoreProvider";
+import { useEffect } from "react";
 
-const Seller  = () => {
-    
+const Seller  = (props: any) => {
+    const store = useBasketStore();
+    const shop: any = props.shopInfo;
+
   return (
     <div className='page-wrapper'>
         <div className="container">
 
             <div className="row">
                 <div className="col-md-12 pb-64">
-                    <BtnBack className="mb-32" />
+                    {/* <BtnBack className="mb-32" /> */}
 
                     <div className="seller-card">
                         <div className="seller-card-left">
-                            <div className="img-seller-card" style={{ backgroundImage: "url(../images/products/product-2.png" }}></div>
+                            <div className="img-seller-card" ></div>
                             <div className="text">
                                 <div className="premium-active">
-                                    <Title20 title="Qazaqstan Jihazy" className="" />
+                                    <Title20 title={shop.name} className="" />
                                     <GivePremium className="" />
                                 </div>
-                                <SubTitle16 title="Продает с Jihaz с 30.09.2022" className="" />
+                                <SubTitle16 title={shop.descRu} className="" />
                             </div>
                         </div>
-                        <div className="seller-card-right">
+                        {/* <div className="seller-card-right">
                             <div className="seller-rate sv-24">
                                 <Rate rating={5} />
                                 <Title24 title="5.0" className="" />
                             </div>
                             <p className="desc-seller">Рейтинг формируется по оценкам покупателей</p>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="tabs-seller">
 
                         <div className="tab-seller d-flex-al-center-space-between">
                             <div className="tabs">
-                                <Tabs title="Отзывы" num={3} className="active" />
-                                <Tabs title="Товары" num={3} className="" />
-                                <Tabs title="Контакты" className="" />
+                                {/* <Tabs title="Отзывы" num={3} className="active" /> */}
+                                <Tabs title="Товары" className="" />
+                                {/* <Tabs title="Контакты" className="" /> */}
                             </div>
-                            <Button title="Оставить отзыв" className="btn btn-secondary btn-48" />
+                            {/* <Button title="Оставить отзыв" className="btn btn-secondary btn-48" /> */}
                         </div>
 
                         <div className="content-seller">
@@ -60,56 +65,43 @@ const Seller  = () => {
                                 />
                             </div> */}
 
-                            {/* <div className="seller-products-block">
-                                <div className="cat-list mb-64">
+                            <div className="seller-products-block">
+                                {/* <div className="cat-list mb-64">
                                     <Category num="4" title="Диваны" srcImage="../images/cats/cat-1.svg" />
                                     <Category num="22" className="active" title="Кровати" srcImage="../images/cats/cat-2.svg" />
                                     <Category num="3" title="Шкафы" srcImage="../images/cats/cat-3.svg" />
                                     <Category num="54" title="Комоды" srcImage="../images/cats/cat-4.svg" />
                                     <Category num="33" title="Столы" srcImage="../images/cats/cat-5.svg" />
                                     <Category num="18" title="Банкетки" srcImage="../images/cats/cat-6.svg" />
-                                </div>
+                                </div> */}
                                 <div className="grid-max">
-                                    <Card 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-1.png'}
-                                        price={'4 790'}
-                                        priceSale={'6 490'}
-                                    />
-                                    <Card 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-2.png'}
-                                        price={'4 790'}
-                                        priceSale={'6 490'}
-                                    />
-                                    <Card 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-1.png'}
-                                        price={'4 790'}
-                                        priceSale={'6 490'}
-                                    />
-                                    <Card 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-2.png'}
-                                        price={'4 790'}
-                                        priceSale={'6 490'}
-                                    />
-                                    <Card 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-1.png'}
-                                        price={'4 790'}
-                                        priceSale={'6 490'}
-                                    />
-                                    <Card 
-                                        title="Журнальный стол Фараон" 
-                                        backgroundImage={'url(../images/products/product-2.png'}
-                                        price={'4 790'}
-                                        priceSale={'6 490'}
-                                    />
+                                    {
+                                        shop.items.map((i: any, index: any) => {
+                                            return (
+                                                <span>
+                                                    <Card 
+                                                        device={props.device}
+                                                        store={store}
+                                                        item={i}
+                                                        href={`/catalog/product/${i.item.id}`}
+                                                        index={index}
+                                                        object3d={i.item.object3d}
+                                                        gltf={i.item.objectGltf}
+                                                        title={i.item.nameRu} 
+                                                        backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
+                                                        priceSale={i.item.price}
+                                                        key={index}
+                                                        price={i.item.price * 0.95}
+                                                    />
+                                                </span>
+                                            )
+                                        })
+                                    }
+                                    
                                 </div>
-                            </div> */}
+                            </div>
 
-                            <div className="seller-contact-block col-md-8 p-0">
+                            {/* <div className="seller-contact-block col-md-8 p-0">
 
                                 <div className="text mb-32">
                                     <SubTitle14 title="Телефон" className="third-color mb-12" />
@@ -150,7 +142,7 @@ const Seller  = () => {
 
                                 </div>
 
-                            </div>
+                            </div> */}
 
                         </div>
 
@@ -163,5 +155,15 @@ const Seller  = () => {
     </div>
   );
 }
+
+export const getServerSideProps = async (ctx: any) => {
+    let data =  await (await fetch(url(`/api/v1/shop/info/${ctx.query.id}`))).json();
+    console.log(data);
+    return {
+        props: {
+            shopInfo: data
+        }
+    }
+};
 
 export default Seller;

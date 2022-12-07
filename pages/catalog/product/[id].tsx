@@ -84,7 +84,7 @@ const ProductInner = (props: any) => {
                                     ) : null
                                 }
                                 {item ?
-                                <DescriptionInLine rateActive={true} rateNum={5} link={item.shopInfo.name} title="Продавец" description="" className="mb-16" />
+                                <DescriptionInLine rateActive={true} rateNum={5} id={item.shopInfo.id} link={item.shopInfo.name} title="Продавец" description="" className="mb-16" />
                                 : null }
                             </div>
 

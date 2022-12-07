@@ -246,8 +246,10 @@
 
     .page-wrapper .grid-max, .basket-order .grid-max {
         grid-template-columns: repeat(auto-fill, 49%);
-        grid-gap: 1%;
+        grid-gap: initial;
+        margin-bottom: 64px;
     }
+    
     .page-wrapper .grid-max .card, .basket-order .grid-max .card {
         flex: 0 0 100%;
     }
