@@ -13,7 +13,7 @@ const Category  = (props: CatProps) => {
   return (
     <div className={`cat-tab ${className}`} onClick={props.onClick ? props.onClick : () => {}}>
         <img src={`${srcImage}`} />
-        <span className="cat-text">{title} <span className="cat-num">{num}</span></span>
+        <span className="cat-text">{title} </span>
     </div>
   );
 }

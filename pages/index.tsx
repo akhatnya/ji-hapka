@@ -38,7 +38,7 @@ const Main = (props: any) => {
                                     return (
                                         <Link href={`/category/${i.category.id}`} key={index}>
                                                  <Category 
-                                                 num={i.itemsCount} 
+                                                 //num={i.itemsCount} 
                                                  key={index} 
                                                  title={i.category.nameRu} 
                                                  srcImage={i.category.smallLogoUrl} />
