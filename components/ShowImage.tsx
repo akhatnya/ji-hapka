@@ -7,10 +7,12 @@ const ShowImage = (props: any) => {
     const { backgroundImage, className } = props;
     const [withMobileModal, setWithMobileModal]: any = useState(null);
     const [isAndroid, setIsAndroid]: any = useState(null);
+    const [isDesktop, setIsDesktop]: any = useState(null);
 
     useEffect(() => {
         setWithMobileModal(props.device.isMobile());
         setIsAndroid(props.device.isAndroid());
+        setIsDesktop(props.device.isDesktop());
     }, []);
 
     return (
@@ -18,7 +20,11 @@ const ShowImage = (props: any) => {
             <div className="big-image">
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
                 <div className="action">
-                    <a  rel="ar"  href={props.objUrl } className="btn btn-white btn-44">
+                    <a rel="ar" href={ !isAndroid ? 
+                            props.objUrl : 
+                            `intent://arvr.google.com/scene-viewer/1.0?file=${props.gltfUrl}#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;` 
+                        } 
+                        className="btn btn-white btn-44">
                         <svg height="33" width="33">
                             <use href={`/images/icons/AR.svg#root`}></use>
                         </svg>
