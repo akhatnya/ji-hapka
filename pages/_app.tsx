@@ -23,18 +23,20 @@ function MyApp({ Component, pageProps }: any) {
 
   return (
     <RootStoreProvider>
-        <Header />
-        <Basket />
-        <Favorite />
-        <Submit />
-        <Component {...pageProps} isMobile={currentDevice.isMobile()} device={currentDevice} />
-        {
-          router.pathname !== "/order" && (
-            <Footer />
-          )
-        }
+      <>
+          <Header />
+          <Basket />
+          <Favorite />
+          <Submit />
+          <Component {...pageProps} isMobile={currentDevice.isMobile()} device={currentDevice} />
+          {
+            router.pathname !== "/order" && (
+              <Footer />
+            )
+          }
+      </>
     </RootStoreProvider>
   )
 }
 
-export default observer(MyApp)
+export default MyApp

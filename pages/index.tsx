@@ -60,7 +60,7 @@ const Main = (props: any) => {
                         <div className="grid-max">
                             {
                                 bestsellers.map((b: any, index: any) => {
-                                    return <div className="card-span">
+                                    return <div className="card-span" key={index}>
                                                 <Card 
                                                     device={props.device}
                                                     store={store}

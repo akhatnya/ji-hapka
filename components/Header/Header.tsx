@@ -1,4 +1,5 @@
 import { observer } from "mobx-react-lite";
+import Link from "next/link";
 import { useEffect } from "react";
 import { useBasketStore } from "../../providers/RootStoreProvider";
 import {useScrollDirection} from '../../utils/useDirection';
@@ -13,12 +14,14 @@ const Header = () => {
       <div className="container mt-24 mb-24">
         <div className="row-header">
             <div className="col-left">
-            <a href="/" className="logotype">
-                    <svg viewBox="0 0 40 35">
-                        <use href='/images/logo/logo.svg#logo'></use>
-                    </svg>
-                    <span className="logo-text">Jihaz</span>
-                </a>
+                <Link href="/" className={"logotype"}>
+                    <span className="logo-text">
+                        <svg viewBox="0 0 40 35">
+                            <use href='/images/logo/logo.svg#logo'></use>
+                        </svg>
+                        Jihaz
+                    </span>
+                </Link>
             </div>
             <div className="col-center">
                

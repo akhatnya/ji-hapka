@@ -24,7 +24,7 @@ const ArItems = (props: any) => {
                         {
                             items?.map((i: any, index: any) => {
                                 return (
-                                            <span>
+                                            <span key={index}>
                                                 <Card 
                                                     device={props.device}
                                                     store={store}
