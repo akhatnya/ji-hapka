@@ -1,12 +1,11 @@
 import React from 'react';
-import { useBasketStore } from '../../providers/RootStoreProvider';
 import BasketOrder from '../BasketOrder';
+import { observer } from 'mobx-react-lite';
 
 const Order = () => {
-    const store = useBasketStore();
     return (
-        <BasketOrder store={store} />
+        <BasketOrder  />
     )
 }
 
-export default (Order);
+export default observer(Order);

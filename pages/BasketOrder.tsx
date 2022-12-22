@@ -7,9 +7,10 @@ import { useRouter } from "next/router";
 import { kzt } from "../utils/globalUtils";
 import  { isMobile } from 'react-device-detect';
 import Link from "next/link";
+import { useBasketStore } from "../providers/RootStoreProvider";
 
-const BasketOrder  = ({store}: any) => {
-
+const BasketOrder  = () => {
+    const store = useBasketStore();
     const router = useRouter();
 
     const [form, setForm]: any = useState({
