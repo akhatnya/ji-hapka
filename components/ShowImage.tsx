@@ -52,7 +52,7 @@ const ShowImage = (props: any) => {
                         <svg height="33" width="33">
                             <use href={`/images/icons/AR.svg#root`}></use>
                         </svg>
-                        Примерить в комнате {percentage}
+                        Примерить в комнате 
                     </a>
                     
                     {/* <a href="/images/STBEBR001BLU-UK-MDL-CM-USDZ.usdz" className="btn btn-white btn-44">
