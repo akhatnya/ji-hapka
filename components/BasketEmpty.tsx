@@ -1,8 +1,8 @@
-import { BtnBack, Card, Button } from "../components";
+import { BtnBack, Card, Button } from ".";
 import { Title24 } from "../Typography";
 
 const BasketEmpty  = () => {
-    
+
   return (
     <div className="basket-order pb-128">
         <div className="container">
