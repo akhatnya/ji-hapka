@@ -12,7 +12,7 @@ import translitRuEn from '../../utils/trans';
 
 const CatInner = (props: any) => {
     const router = useRouter();
-    const { id } = props;
+    const { id, cat } = props;
     const store = useBasketStore();
 
     const [items, setItems]: any = useState(props.items);
@@ -20,8 +20,7 @@ const CatInner = (props: any) => {
     const [categories, setCategories]: any = useState([]);
 
     useEffect(() => {
-        console.log(categories)
-        loadCategories((response: any) => setCategories(response.data));
+        setCategories(cat);
         setCurrentCategory(id);
     }, []);
 
@@ -36,13 +35,14 @@ const CatInner = (props: any) => {
           category: "Tap_category",
           action: `Tap_category_${translitRuEn(i.category.nameRu)}`,
         });
+        setCurrentCategory(i.category.id);
         router.push(`/category/${i.category.id}`)
     }
 
   return (
     <Layout
-        title={`${categories.find((c: any) => c.category.id == currentCategory)?.category?.nameRu} 🛋 в Алматы в кредит и рассрочку - примерить в комнате и заказать онлайн в Jihaz AR`}
-        description={`Купить ${categories.find((c: any) => c.category.id == currentCategory)?.category?.nameRu} 🛋 в Алматы ✅ Преимущества Jihaz AR: ✔100% соответствие цвета и размера ✔Быстрое решение по покупке мебели ✔Проверенные продавцы мебели. Выбирайте и примеряйте мебель в комнате с дополненной реальностью, Сравнивайте цены всех продавцов`}
+        title={`${cat.find((c: any) => c.category.id == currentCategory).category.nameRu} 🛋 в Алматы в кредит и рассрочку - примерить в комнате и заказать онлайн в Jihaz AR`}
+        description={`Купить ${cat.find((c: any) => c.category.id == currentCategory).category.nameRu} 🛋 в Алматы ✅ Преимущества Jihaz AR: ✔100% соответствие цвета и размера ✔Быстрое решение по покупке мебели ✔Проверенные продавцы мебели. Выбирайте и примеряйте мебель в комнате с дополненной реальностью, Сравнивайте цены всех продавцов`}
         keywords="Мебель, примерка, диваны, дополненная реальность, 3D примерка, ковры, товары для дома"
     >
         <div className='page-wrapper'>
@@ -102,7 +102,8 @@ export const getServerSideProps = async (context: any) => {
     return {
         props: {
             items: await (await fetch(url(`/items/category/${context.query.id}`))).json(),
-            id: context.query.id
+            id: context.query.id,
+            cat: await (await fetch(url(`/categories-with-count`))).json(),
         }
     }
 }
