@@ -2,16 +2,20 @@
 import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import ReactGA from "react-ga";
+import translitRuEn from '../utils/trans';
 import { Banner, Card, Category } from "../components";
 import { PopularCats, SearchRoom, ForSellers } from "../containers";
 import { useBasketStore } from "../providers/RootStoreProvider";
 import { loadBestsellers, loadCategories, loadMenu } from "../src/requests/requests";
 import { SubTitle16, Title24 } from "../Typography";
-import useMobileDetect from "../utils/MobileDetect";
+import { Layout } from "../containers";
 
 
 const Main = (props: any) => {
     const store = useBasketStore();
+    const router = useRouter();
     const [categories, setCategories]: any = useState([]);
     const [bestsellers, setBestsellers]: any = useState([]);
     const [menu, setMenu]: any = useState({
@@ -25,135 +29,149 @@ const Main = (props: any) => {
         loadMenu((response: any) => setMenu(response.data));
     }, [])
 
+    const onClickCategory = (i: any) => {
+        ReactGA.event({
+          category: "Tap_category",
+          action: `Tap_category_${translitRuEn(i.category.nameRu)}`,
+        });
+        router.push(`/category/${i.category.id}`)
+    }
+
   return (
-    <main className='main'>
-        <section className="main-banner">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <Banner/>
-                        <div className="cat-list ptb-64">
-                            {
-                             categories.map((i: any, index: any) => {
-                                    return (
-                                        <Link href={`/category/${i.category.id}`} key={index}>
-                                                 <Category 
-                                                 //num={i.itemsCount} 
-                                                 key={index} 
-                                                 title={i.category.nameRu} 
-                                                 srcImage={i.category.smallLogoUrl} />
-                                            </Link>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section className="sale-hit pb-64">
-            <div className="container">
-                <div className="row">
-                    <div onClick={() => store.saveBasketInCookie()} className="col-md-12">
-                        <Title24 title="Хиты продаж" className="mb-32" />
-                        <div className="grid-max">
-                            {
-                                bestsellers.map((b: any, index: any) => {
-                                    return <div className="card-span" key={index}>
-                                                <Card 
-                                                    device={props.device}
-                                                    store={store}
-                                                    item={b}
-                                                    title={b.item.nameRu}
-                                                    key={index}
-                                                    object3d={b.item.object3d}
-                                                    gltf={b.item.objectGltf}
-                                                    backgroundImage={`url(${b?.itemPhotos[0]?.photo.url})`}
-                                                    price={b.item.price * 0.95}
-                                                    priceSale={b.item.price}
-                                                    href={`/catalog/product/${b.item.id}`}
-                                                />
-                                            </div>
-                                })
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <PopularCats menu={menu} />
-
-        <section className="advantages mb-64">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-4">
-
-                        <div className="pr-32">
-                            <h2 className="h2-title mb-16">
-                                Выбирайте мебель <br/>за <span className="line-through third-color">недели</span> минуты
-                            </h2>
-                            <SubTitle16 title="Помогаем сэкономить ваше время
-                                            на поездках в выставочные залы
-                                            и поиск мебели в Интернете" className="" />
-                        </div>
-                        
-                    </div>
-                    <div className="col-md-4">
-                        <div className="advant-info mb-32">
-                            <svg height="32" width="33">
-                                <use href={`/images/icons/WavyCheck.svg#root`}></use>
-                            </svg>
-                            <div className="advant-text">
-                                <h4>Проверенные продавцы</h4>
-                                <p>Ищите мебель для дома или офиса у проверенных продавцов</p>
-                            </div>
-                        </div>
-
-                        <div className="advant-info">
-                            <svg height="32" width="33">
-                                <use href={`/images/icons/AR.svg#root`}></use>
-                            </svg>
-                            <div className="advant-text">
-                                <h4>Примерка дома</h4>
-                                <p>Примерьте мебель в комнате не выходя из дома</p>
+    <Layout
+        title="Jihaz AR – маркетплейс мебели для дома и офиса с виртуальной примеркой AR Augmented Reality"
+        description="Jihaz AR – примерка мебели в комнате с дополненной реальностью AR и покупка в кредит, рассрочку у продавцов высококачественной мебели в Алматы, Астане"
+        keywords="Мебель, примерка, дополненная реальность, 3D примерка, ковры, товары для дома"
+    >
+        <main className='main'>
+            <section className="main-banner">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <Banner/>
+                            <div className="cat-list ptb-64">
+                                {
+                                categories.map((i: any, index: any) => {
+                                        return (
+                                            <span onClick={() => onClickCategory(i)} key={index}>
+                                                    <Category 
+                                                    //num={i.itemsCount} 
+                                                    key={index} 
+                                                    title={i.category.nameRu} 
+                                                    srcImage={i.category.smallLogoUrl} />
+                                                </span>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4">
-                        <div className="advant-info mb-32">
-                            <svg height="32" width="33">
-                                <use href={`/images/icons/WavyCheck.svg#root`}></use>
-                            </svg>
-                            <div className="advant-text">
-                                <h4>Доставка</h4>
-                                <p>Оформите мебель с доставкой на дом, офис или заберите заказ самовывозом.</p>
+                </div>
+            </section>
+
+            <section className="sale-hit pb-64">
+                <div className="container">
+                    <div className="row">
+                        <div onClick={() => store.saveBasketInCookie()} className="col-md-12">
+                            <Title24 title="Хиты продаж" className="mb-32" />
+                            <div className="grid-max">
+                                {
+                                    bestsellers.map((b: any, index: any) => {
+                                        return <div className="card-span" key={index}>
+                                                    <Card 
+                                                        device={props.device}
+                                                        store={store}
+                                                        item={b}
+                                                        title={b.item.nameRu}
+                                                        key={index}
+                                                        object3d={b.item.object3d}
+                                                        gltf={b.item.objectGltf}
+                                                        backgroundImage={`url(${b?.itemPhotos[0]?.photo.url})`}
+                                                        price={b.item.price * 0.95}
+                                                        priceSale={b.item.price}
+                                                        href={`/catalog/product/${b.item.id}`}
+                                                    />
+                                                </div>
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
-        </section>
+            </section>
+            
+            <PopularCats menu={menu} />
 
-        <SearchRoom menu={menu} />
+            <section className="advantages mb-64">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-4">
 
-        {/* <ForSellers /> */}
+                            <div className="pr-32">
+                                <h2 className="h2-title mb-16">
+                                    Выбирайте мебель <br/>за <span className="line-through third-color">недели</span> минуты
+                                </h2>
+                                <SubTitle16 title="Помогаем сэкономить ваше время
+                                                на поездках в выставочные залы
+                                                и поиск мебели в Интернете" className="" />
+                            </div>
+                            
+                        </div>
+                        <div className="col-md-4">
+                            <div className="advant-info mb-32">
+                                <svg height="32" width="33">
+                                    <use href={`/images/icons/WavyCheck.svg#root`}></use>
+                                </svg>
+                                <div className="advant-text">
+                                    <h4>Проверенные продавцы</h4>
+                                    <p>Ищите мебель для дома или офиса у проверенных продавцов</p>
+                                </div>
+                            </div>
 
-        <section className="jihhaz-app mb-64">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <Title24 title="Jihaz.app" className=""/>
-                        <SubTitle16 title="Jihaz —  интернет-площадка для поиска современной мебели и примерки её в комнате. 
-Jihaz запустился в 2022 году. Сегодня у нас на площадке размещена продукция 10 крупных продавцов мебели. Прямая коммуникация и продажи между производителем и покупателем позволяют оперативно реагировать на изменения спроса, улучшать клиентский сервис, собирать обратную связь и, как следствие, повышать качество предлагаемых продуктов и услуг. Результат такого подхода к потребителю и глубокого понимания рынка — десятки тысяч довольных клиентов." className=""/>
+                            <div className="advant-info">
+                                <svg height="32" width="33">
+                                    <use href={`/images/icons/AR.svg#root`}></use>
+                                </svg>
+                                <div className="advant-text">
+                                    <h4>Примерка дома</h4>
+                                    <p>Примерьте мебель в комнате не выходя из дома</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div className="advant-info mb-32">
+                                <svg height="32" width="33">
+                                    <use href={`/images/icons/WavyCheck.svg#root`}></use>
+                                </svg>
+                                <div className="advant-text">
+                                    <h4>Доставка</h4>
+                                    <p>Оформите мебель с доставкой на дом, офис или заберите заказ самовывозом.</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-    </main>
+            <SearchRoom menu={menu} />
+
+            {/* <ForSellers /> */}
+
+            <section className="jihhaz-app mb-64">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <Title24 title="Jihaz.app" className=""/>
+                            <SubTitle16 title="Jihaz —  интернет-площадка для поиска современной мебели и примерки её в комнате. 
+    Jihaz запустился в 2022 году. Сегодня у нас на площадке размещена продукция 10 крупных продавцов мебели. Прямая коммуникация и продажи между производителем и покупателем позволяют оперативно реагировать на изменения спроса, улучшать клиентский сервис, собирать обратную связь и, как следствие, повышать качество предлагаемых продуктов и услуг. Результат такого подхода к потребителю и глубокого понимания рынка — десятки тысяч довольных клиентов." className=""/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </Layout>
   );
 }
 

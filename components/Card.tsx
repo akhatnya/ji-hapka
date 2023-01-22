@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Rate, Button, ReviewQty } from "../components";
 import { kzt } from "../utils/globalUtils";
+import { useRouter } from "next/router";
+import ReactGA from "react-ga";
 
 interface CardProps {
   title: string;
@@ -18,24 +20,45 @@ interface CardProps {
 const Card  = (props: any) => {
   const { href, title, backgroundImage, price, priceSale, item, store  } = props;
   const [obj, setObj]: any = useState(null);
+  const router = useRouter();
   useEffect(() => {
     setObj(store.favorites.find((i: any) => {return i.id === item.item.id}))
   }, [obj])
+
+  const onClickItem = () => {
+      ReactGA.event({
+        category: "Tap_sales_hits",
+        action: `Tap_sales_hits_${item.item.id}})}`,
+      });
+      router.push(href)
+  }
   return (
     <div className="card">
         <div className="image-card">
-            <Link href={href}>
+            <span onClick={onClickItem}>
                 <div className="img" style={{ backgroundImage: `${backgroundImage}` }}></div>
-            </Link>
+            </span>
             {
                 store.favorites?.length === 0 ? (
-                    <div onClick={() => {store.addFavorite(item)}} className="favorite">
+                    <div onClick={() => {
+                        ReactGA.event({
+                            category: "Tap_likes",
+                            action: `Tap_likes_${item.item.id}})}`,
+                        });
+                        store.addFavorite(item)
+                    }} className="favorite">
                         <svg height="32" width="32"> 
                             <use href={`/images/icons/heart.svg#root`}></use>
                         </svg>
                     </div>
                 ) : (
-                    <div onClick={() => {store.addFavorite(item)}} className="favorite">
+                    <div onClick={() => {
+                        ReactGA.event({
+                            category: "Tap_likes",
+                            action: `Tap_likes_${item.item.id}})}`,
+                        });
+                        store.addFavorite(item)
+                    }} className="favorite">
                         <svg height="32" width="32"> 
                             <use style={{color: obj ? 'red' : 'black'}} href={`/images/icons/heart.svg#root`}></use>
                         </svg>
@@ -53,7 +76,7 @@ const Card  = (props: any) => {
             </div>
         </div>
         <div className="text-card">
-            <Link href={href}>
+            <span onClick={onClickItem}>
             <div className="info">
                 <h3>{title}</h3>
                 <div className="price">
@@ -68,9 +91,15 @@ const Card  = (props: any) => {
                     </div> : null 
                 }
             </div>
-            </Link>
+            </span>
             <div className="btn-action">
-                <Button onClick={() => {store.addJihaz(item); store.setBasket()}} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
+                <Button onClick={() => {
+                    ReactGA.event({
+                        category: "Tap_add_to_cart",
+                        action: `Tap_add_to_cart_${item.item.id}})}`,
+                    });
+                    store.addJihaz(item); store.setBasket()
+                }} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
             </div>
         </div>
     </div>
