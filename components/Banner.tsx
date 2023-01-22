@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import ReactGA from "react-ga";
 import { Button } from "../components";
 
 const Banner = () => {
@@ -11,7 +12,13 @@ const Banner = () => {
           <h1>Jihaz AR</h1>
           <p>Примерьте мебель<br/>у себя в комнате</p>
           <Button iconRight={true} 
-                    onClick={() => router.push("/ArItems")}
+                    onClick={() => {
+                      ReactGA.event({
+                        category: "Tap_Banner",
+                        action: "Tap_Banner1",
+                      });
+                      router.push("/ArItems")
+                    }}
                     sizeIcon="28" 
                     svgIcon="/images/icons/AR-28.svg#root" 
                     title="Примерить мебель" 

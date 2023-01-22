@@ -4,6 +4,7 @@ import { exitCode } from "process";
 import { useEffect, useState } from "react";
 import { ThumbImage } from "../components";
 import { Title20 } from "../Typography";
+import ReactGA from "react-ga";
 
 const ShowImage = (props: any) => {
     const download = async (objectUrl: any) => {
@@ -32,6 +33,14 @@ const ShowImage = (props: any) => {
         setIsDesktop(props.device.isDesktop());
     }, []);
 
+    const onClose = () => {
+        ReactGA.event({
+            category: "Tap_closing_themodal",
+            action: `Tap_closing_themodal1`,
+        });
+        setWithMobileModal(false)
+    }
+
     return (
         <div className={`image-full-show ${className}`}>
             <div className="big-image">
@@ -43,6 +52,10 @@ const ShowImage = (props: any) => {
                         } 
                         id="clickMeAgain"
                         onClick={async (evt: any) => { 
+                            ReactGA.event({
+                                category: "Tap_try_ontheroom",
+                                action: `Tap_try_ontheroom1`,
+                            });
                             if (downloading == null) {
                                 await download(props.objUrl); 
                                 setDownloading(true);
@@ -71,7 +84,7 @@ const ShowImage = (props: any) => {
 
                                 <Title20 title="Примерьте эту мебель у себя в комнате" className="" />
 
-                                <svg onClick={() => setWithMobileModal(false)} height="24" width="24">
+                                <svg onClick={onClose} height="24" width="24">
                                     <use href={`/images/icons/close-24-current.svg#root`}></use>
                                 </svg>
 

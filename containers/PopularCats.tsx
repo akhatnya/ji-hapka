@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { Title24, Title20 ,SubTitle16 } from "../Typography";
+import { useRouter } from "next/router";
+import ReactGA from "react-ga";
+import translitRuEn from '../utils/trans';
 
 const PopularCats = (props: any) => {
+    const router = useRouter();
 
     const blockClassnames = [
         {a: 'h-400', b: 'mb-8'},
@@ -11,6 +15,15 @@ const PopularCats = (props: any) => {
         {a: 'h-400 tl-32', b: ''},
         {a: 'h-400 tl-32', b: ''},
     ];
+
+    const onClickCategory = (i: any) => {
+        console.log(i.nameRu)
+        ReactGA.event({
+          category: "Tap_popular_categories",
+          action: `Tap_popular_categories_${translitRuEn(i.nameRu)}`,
+        });
+        router.push(`/category/${i.id}`)
+    }
 
     return (
         <section className="popular-cats pb-64">
@@ -23,15 +36,13 @@ const PopularCats = (props: any) => {
                     <div className="popular-cats-list-block">
                         {
                             props.menu?.categories?.map((i: any, index: any) => {
-                                return <Link href={`/category/${i.id}`}>
-                                            <div key={index} className={`popular-cats-img ${blockClassnames[index].a}`}>
-                                                <img src={i.logoUrl} />
-                                                <div className="popular-cats-info">
-                                                    <Title20 title={i.nameRu} className={blockClassnames[index].b} />
-                                                    <SubTitle16 title="30 моделей" className="" />
-                                                </div>
+                                return <div onClick={() => onClickCategory(i)} key={`catPop${index}`} className={`popular-cats-img ${blockClassnames[index].a}`}>
+                                            <img src={i.logoUrl} />
+                                            <div className="popular-cats-info">
+                                                <Title20 title={i.nameRu} className={blockClassnames[index].b} />
+                                                <SubTitle16 title="30 моделей" className="" />
                                             </div>
-                                        </Link>
+                                        </div>
                             })
                         }
 
