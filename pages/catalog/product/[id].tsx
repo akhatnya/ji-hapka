@@ -23,7 +23,7 @@ const ProductInner = (props: any) => {
         title={`Примерить и купить ${item?.item?.nameRu} в рассрочку в Алматы – Jihaz AR`}
         description={`Jihaz AR – ${item?.item?.nameRu} с виртуальной примеркой, покупка в рассрочку, кредит`}
         keywords={`${item?.item?.nameRu}, примерить в комнате, купить в рассрочку, кредит, характеристики, описание, отзывы, рейтинг`}
-        image={curImage}
+        image={item?.itemPhotos[0]?.photo?.url}
     >
         <div className='page-wrapper'>
             <div className="container">
