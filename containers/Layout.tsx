@@ -22,8 +22,9 @@ const Layout = ({ children, title = "Jihaz AR", description, keywords, image = "
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:keywords" content={keywords} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" itemProp="image" content={image} />
       <meta property="og:url" content="http://jihazapp.kz/" />
+      <meta property="og:type" content="website" />
     </Head>
     {children}
   </>
