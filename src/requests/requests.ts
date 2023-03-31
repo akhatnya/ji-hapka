@@ -6,7 +6,7 @@ export const loadCategories = async (callBack: any) => {
 }
 
 export const loadRooms = async (callBack: any) => {
-    return axios.get(url('/rooms')).then(callBack);
+    return axios.get(url('/v1/rooms')).then(callBack);
 }
 
 export const loadBestsellers = async (callback: any) => {
@@ -30,5 +30,5 @@ export const loadItemDetails = async (itemId: any, callback: any) => {
 }
 
 export const sendOrder = async (form: any, callback: any) => {
-    return axios.post(url(`/api/v1/order/create`), form).then(callback).catch((err: any) => {})
+    return axios.post(url(`/v1/order/create`), form).then(callback).catch((err: any) => {})
 }
