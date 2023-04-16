@@ -1544,7 +1544,7 @@ p {
 .breadcrumbs {
     display: flex;
 }
-.breadcrumbs .bc-l, .breadcrumbs .active {
+.breadcrumbs a, .breadcrumbs span {
   font-weight: 400;
   font-size: 14px;
   color: var(--third-text-color);
@@ -1554,10 +1554,10 @@ p {
   user-select: none;
   transition: .3s;
 }
-.breadcrumbs .bc-l:hover {
+.breadcrumbs a:hover {
   color: var(--primary-text-color);
 }
-.breadcrumbs .bc-l::before {
+.breadcrumbs a::before {
   content: '/';
   position: absolute;
   right: -4px;
@@ -1565,7 +1565,7 @@ p {
   top: 0;
   bottom: 0;
 }
-.breadcrumbs .bc-l.active::before {
+.breadcrumbs a.active::before {
   content: unset;
 }
 
@@ -2403,7 +2403,7 @@ p {
     .breadcrumbs {
         flex-wrap: wrap;
     }
-    .breadcrumbs .bc-l, .breadcrumbs .active {
+    .breadcrumbs a, .breadcrumbs span {
         font-size: 12px;
     }
     .cart-basket .qty-basket {

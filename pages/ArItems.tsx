@@ -1,61 +1,61 @@
 import { observer } from "mobx-react-lite";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { Card, Category, Breadcrumbs } from "../components";
+import React, { useState } from "react";
+import { Card, Breadcrumbs } from "../components";
 import { useBasketStore } from "../providers/RootStoreProvider";
-import { loadRooms, loadItemsByRoomId } from "../src/requests/requests";
-import { url } from "../src/urls";
-import { Title24 } from "../Typography";
+import { loadWith3d } from "../src/requests/requests";
+import { Title24 } from "../components/Typography";
+import { API_STORAGE } from "../src/consts";
 
 const ArItems = (props: any) => {
-    const store = useBasketStore();
+  const { itemsReq } = props;
+  const store = useBasketStore();
+  const [items, setItems]: any = useState(itemsReq);
 
-    const [items, setItems]: any = useState(props.items);
+  return (
+    <div className="page-wrapper">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <Breadcrumbs
+              main="Примерить мебель с AR"
+              isMain={true}
+              className="pb-24 mb-24"
+            />
 
-    return (
-    <div className='page-wrapper'>
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <Breadcrumbs className="pb-24 mb-24"/>
-
-                    <Title24 title="Примерьте в комнате" className="mb-32" />
-                    <div className="grid-max">
-                        {
-                            items?.map((i: any, index: any) => {
-                                return (
-                                            <span key={index}>
-                                                <Card 
-                                                    device={props.device}
-                                                    store={store}
-                                                    item={i}
-                                                    href={`/catalog/product/${i.item.id}`}
-                                                    index={index}
-                                                    title={i.item.nameRu} 
-                                                    backgroundImage={`url(${i.itemPhotos[0]?.photo.url}`}
-                                                    price={i.item.price}
-                                                    key={index}
-                                                    priceSale={i.item.price * 0.95}
-                                                />
-                                            </span>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
+            <Title24 title="Примерьте в комнате" className="mb-32" />
+            <div className="grid-max">
+              {items?.map((i: any, index: any) => {
+                return (
+                  <span key={index}>
+                    <Card
+                      device={props.device}
+                      store={store}
+                      item={i}
+                      href={`/catalog/product/${i.id}`}
+                      index={index}
+                      title={i.name}
+                      backgroundImage={`url(${API_STORAGE}${i.image[0]}`}
+                      price={i.price}
+                      key={index}
+                      priceSale={i.price * 0.95}
+                    />
+                  </span>
+                );
+              })}
             </div>
+          </div>
         </div>
-
+      </div>
     </div>
   );
-}
+};
 
 export const getStaticProps = async (context: any) => {
-    return {
-        props: {
-            items: await (await fetch(url(`/items/with3d`))).json()
-        }
-    }
-}
+  return {
+    props: {
+      itemsReq: await loadWith3d((r: any) => r.data),
+    },
+  };
+};
 
 export default observer(ArItems);

@@ -1,44 +1,41 @@
-import Banner from "../components/Banner";
-import Button from "../components/Button";
-import Card from "../components/Card";
-import Category from "../components/Category";
-import Breadcrumbs from "../components/Breadcrumbs";
-import SideBar from "../components/SideBar";
-import BasketList from "../components/BasketList";
-import NavArrow from "../components/NavArrow";
-import CardSame from "../components/CardSame";
-import BtnBack from "../components/BtnBack";
-import Input from "../components/Input";
-import RadioButton from "../components/RadioButton";
-import Quantity from "../components/Quantity";
-import Rate from "../components/Rate";
-import ReviewQty from "../components/ReviewQty";
-import ShowImage from "../components/ShowImage";
-import ThumbImage from "../components/ThumbImage";
-import Comment from "../components/Comment";
-import TextArea from "../components/TextArea";
-import Tabs from "../components/Tabs";
-import GivePremium from "../components/GivePremium";
+import Header from "./Header";
+import HeaderNav from "./HeaderNav";
+import HeaderNavLink from "./HeaderNavLink";
+import Banner from "./Banner";
+import BasketEmpty from "./BasketEmpty";
+import BasketList from "./BasketList";
+import Breadcrumbs from "./Breadcrumbs";
+import Card from "./Card";
+import CardSame from "./CardSame";
+import Category from "./Category";
+import Comment from "./Comment";
+import Footer from "./Footer";
+import GivePremium from "./GivePremium";
+import Quantity from "./Quantity";
+import Rate from "./Rate";
+import ReviewQty from "./ReviewQty";
+import ShowImage from "./ShowImage";
+import SideBar from "./SideBar";
+import Tabs from "./Tabs";
 
-export { Banner,
-        Card,
-        Button,
-        Category,
-        Breadcrumbs,
-        SideBar,
-        BasketList,
-        NavArrow,
-        CardSame,
-        BtnBack,
-        Input,
-        RadioButton,
-        Quantity,
-        Rate,
-        ReviewQty,
-        ShowImage,
-        ThumbImage,
-        Comment, 
-        TextArea,
-        Tabs,
-        GivePremium
-    };
+export {
+  Header,
+  HeaderNav,
+  HeaderNavLink,
+  Banner,
+  BasketEmpty,
+  BasketList,
+  Breadcrumbs,
+  Card,
+  CardSame,
+  Category,
+  Comment,
+  Footer,
+  GivePremium,
+  Quantity,
+  Rate,
+  ReviewQty,
+  ShowImage,
+  SideBar,
+  Tabs,
+};

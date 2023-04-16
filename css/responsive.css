@@ -50,7 +50,7 @@
     .breadcrumbs {
         flex-wrap: wrap;
     }
-    .breadcrumbs .bc-l, .breadcrumbs .active {
+    .breadcrumbs a, .breadcrumbs span {
         font-size: 12px;
     }
     .cart-basket .qty-basket {

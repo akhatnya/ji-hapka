@@ -1355,6 +1355,9 @@ p {
     background-color: var(--white-color);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
 }
+.card:hover .image-card {
+  background-color: rgba(5, 30, 71, 0.3);;
+}
 .card:hover .image-card .btn-3d {
     opacity: 1;
 }
@@ -1545,7 +1548,7 @@ p {
 .breadcrumbs {
     display: flex;
 }
-.breadcrumbs .bc-l, .breadcrumbs .active {
+.breadcrumbs a, .breadcrumbs span {
   font-weight: 400;
   font-size: 14px;
   color: var(--third-text-color);
@@ -1555,10 +1558,10 @@ p {
   user-select: none;
   transition: .3s;
 }
-.breadcrumbs .bc-l:hover {
+.breadcrumbs a:hover {
   color: var(--primary-text-color);
 }
-.breadcrumbs .bc-l::before {
+.breadcrumbs a::before {
   content: '/';
   position: absolute;
   right: -4px;
@@ -1566,7 +1569,7 @@ p {
   top: 0;
   bottom: 0;
 }
-.breadcrumbs .bc-l.active::before {
+.breadcrumbs a.active::before {
   content: unset;
 }
 
@@ -1821,6 +1824,7 @@ p {
   bottom: 24px;
   display: flex;
   justify-content: center;
+  z-index: 11;
 }
 .image-full-show .action a {
   box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
@@ -1860,6 +1864,7 @@ p {
   align-items: center;
   justify-content: center;
   background-color: rgba(244, 243, 241, 0.8);
+  z-index: 10;
 }
 .qr-code .qr-code-inner {
   text-align: center;
@@ -1908,6 +1913,30 @@ p {
 }
 .sidebar .sidebar-inner .sidebar-body {
   position: relative;
+}
+.mobile-scroll {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    z-index: 1013;
+}
+
+.mobile-scroll-inner {
+    overflow: hidden scroll;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+.mobile-scroll-inner .scroll-close {
+    height: 20vh;
+    flex-shrink: 0;
+    pointer-events: none;
 }
 
 

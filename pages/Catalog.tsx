@@ -8,7 +8,7 @@ const Catalog  = () => {
         <div className="container">
             <div className="row">
                 <div className="col-md-12 pb-64">
-                    <Breadcrumbs className="" />
+                    {/* <Breadcrumbs  className="" /> */}
                 </div>
             </div>
         </div>

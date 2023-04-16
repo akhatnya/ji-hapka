@@ -1,114 +1,148 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import { ShowImage, Breadcrumbs, NavArrow, CardSame, Button, Rate, ReviewQty, ThumbImage, Comment } from "../../../components";
+import { ShowImage, Breadcrumbs, Rate, ReviewQty } from "../../../components";
+import { Button } from "../../../components/CustomComponents";
 import { Layout } from "../../../containers";
 import { useBasketStore } from "../../../providers/RootStoreProvider";
 import { url } from "../../../src/urls";
-import { Title20, DescriptionInLine } from "../../../Typography";
+import { Title20, DescriptionInLine } from "../../../components/Typography";
 import { kzt } from "../../../utils/globalUtils";
 import ReactGA from "react-ga";
+import { API_STORAGE } from "../../../src/consts";
 
 const ProductInner = (props: any) => {
-    const store = useBasketStore();
-    const { item }: any = props;
-    const [curImage, setCurImage]: any = useState(null);
-    useEffect(() => {
-        if (item) {
-            setCurImage(item.itemPhotos[0].photo.url)
-        }
-    }, [])
+  const store = useBasketStore();
+  const { item, cat }: any = props;
+  const [curImage, setCurImage]: any = useState(null);
+  useEffect(() => {
+    if (item) {
+      setCurImage(item.image[0]);
+    }
+  }, []);
 
   return (
     <Layout
-        title={`Примерить и купить ${item?.item?.nameRu} в рассрочку в Алматы – Jihaz AR`}
-        description={`Jihaz AR – ${item?.item?.nameRu} с виртуальной примеркой, покупка в рассрочку, кредит`}
-        keywords={`${item?.item?.nameRu}, примерить в комнате, купить в рассрочку, кредит, характеристики, описание, отзывы, рейтинг`}
-        image={item?.itemPhotos[0]?.photo?.url}
+      title={`Примерить и купить ${item.name} в рассрочку в Алматы – Jihaz AR`}
+      description={`Jihaz AR – ${item.name} с виртуальной примеркой, покупка в рассрочку, кредит`}
+      keywords={`${item.name}, примерить в комнате, купить в рассрочку, кредит, характеристики, описание, отзывы, рейтинг`}
+      image={API_STORAGE + item.image[0]}
     >
-        <div className='page-wrapper'>
-            <div className="container">
+      <div className="page-wrapper">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12 pb-24">
+              <Breadcrumbs
+                main={item.category.name}
+                isMain={false}
+                link={`/category/${item.category_id}`}
+                inner={item.name}
+                className=""
+              />
+            </div>
 
-                <div className="row">
-                    <div className="col-md-12 pb-64">
-                        <Breadcrumbs className=""/>
+            <div className="product-grid-block">
+              <div className="col-grid-1">
+                <ShowImage
+                  device={props.device}
+                  images={item?.image}
+                  setCurImage={setCurImage}
+                  curImage={curImage}
+                  objUrl={item.object_3d}
+                  gltfUrl={item.object_gltf}
+                  backgroundImage={`url(${API_STORAGE}${curImage}`}
+                  className="mb-32"
+                />
+              </div>
+
+              {item ? (
+                <div className="col-grid-2">
+                  <div className="product-inner-info">
+                    <div className="about-info d-flex-al-center-space-between mb-12">
+                      <h1>{item.name}</h1>
+                      <div
+                        onClick={() => {
+                          ReactGA.event({
+                            category: "Tap_likes",
+                            action: `Tap_likes_${item.id}})}`,
+                          });
+                          store.addFavorite(item);
+                        }}
+                        className="favorite"
+                      >
+                        <svg height="32" width="32">
+                          <use
+                            href={`/images/icons/heart${
+                              store.favorites?.filter(
+                                (f: any) => f.id === item.id
+                              ).length > 0
+                                ? "-fill.svg#root"
+                                : ".svg#root"
+                            }`}
+                          ></use>
+                        </svg>
+                      </div>
                     </div>
+                    {/* <SubTitle16 title="Диван угловой Лофт" className="mb-24" /> */}
+                    <div className="rate-review sv-20 mb-24">
+                      <Rate rating={5} />
+                      <ReviewQty num="2" className="active" />
+                    </div>
+                    <h2 className="mb-32">{kzt(item.price)}</h2>
+                    <Button
+                      onClick={() => {
+                        ReactGA.event({
+                          category: "Tap_add_to_cart",
+                          action: `Tap_add_to_cart_${item.id}})}`,
+                        });
+                        store.addJihaz(item);
+                        store.setBasket();
+                      }}
+                      iconLeft={true}
+                      sizeIcon="32"
+                      svgIcon="/images/icons/cart-badge-plus.svg#root"
+                      title="Добавить в корзину"
+                      className="btn btn-primary w-100 btn-54"
+                    />
+                  </div>
+                </div>
+              ) : null}
 
-                    <div className="product-grid-block">
-                        <div className="col-grid-1">
-                            <ShowImage 
-                                device={props.device}
-                                images={item?.itemPhotos}
-                                setCurImage={setCurImage}
-                                curImage={curImage}
-                                objUrl={item.item.object3d}
-                                gltfUrl={item.item.objectGltf}
-                                backgroundImage={`url(${curImage}`} 
-                                className="mb-32"
+              <div className="col-grid-3">
+                <div className="product-inner-desc">
+                  <Title20 title="О товаре" className="mb-32" />
+                  <div className="desc-block mb-32">
+                    {item.itemAttributes
+                      ? item.itemAttributes.map((i: any, index: any) => {
+                          let isNum = i.attribute.isNumeric;
+                          return (
+                            <DescriptionInLine
+                              key={index}
+                              rateActive={false}
+                              rateNum={0}
+                              link=""
+                              title={i.attribute.name}
+                              description={
+                                !isNum ? i.value.tvalueRu : i.value.nvalue
+                              }
+                              className="mb-16"
                             />
-                        </div>
+                          );
+                        })
+                      : null}
+                    {item.shop_info ? (
+                      <DescriptionInLine
+                        rateActive={true}
+                        rateNum={5}
+                        id={item.shop_info.id}
+                        link={item.shop_info.name}
+                        title="Продавец"
+                        description=""
+                        className="mb-16"
+                      />
+                    ) : null}
+                  </div>
 
-
-                        {
-                            item ?
-                                <div className="col-grid-2">
-                                    <div className="product-inner-info">
-                                        <div className="about-info d-flex-al-center-space-between mb-12">
-                                            <h1>{item?.item?.nameRu}</h1>
-                                            <button onClick={() => {
-                                                ReactGA.event({
-                                                    category: "Tap_likes",
-                                                    action: `Tap_likes_${item?.item?.id}})}`,
-                                                });
-                                                store.addFavorite(item)
-                                            }} className="btn btn-auto-link b-none">
-                                                <svg height="32" width="32">
-                                                    <use href={`/images/icons/heart.svg#root`}></use>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        {/* <SubTitle16 title="Диван угловой Лофт" className="mb-24" /> */}
-                                        <div className="rate-review sv-20 mb-24">
-                                            <Rate rating={5} />
-                                            <ReviewQty num="2" className="active"/>
-                                        </div>
-                                        <h2 className="mb-32">{kzt(item?.item?.price)}</h2>
-                                        <Button onClick={() => {
-                                            ReactGA.event({
-                                                category: "Tap_add_to_cart",
-                                                action: `Tap_add_to_cart_${item?.item?.id}})}`,
-                                            });
-                                            store.addJihaz(item); store.setBasket()}} iconLeft={true} sizeIcon="32" svgIcon="/images/icons/cart-badge-plus.svg#root" title="Добавить в корзину" className="btn btn-primary w-100 btn-54" />
-                                    </div>
-                                </div> : null 
-                            }
-
-                        <div className="col-grid-3">
-                            <div className="product-inner-desc">
-                                <Title20 title="О товаре" className="mb-32" />
-                                <div className="desc-block mb-32">
-                                    {
-                                        item ? (
-                                            item.itemAttributes.map((i: any, index: any) => {
-                                                let isNum = i.attribute.isNumeric;
-                                                return <DescriptionInLine 
-                                                            key={index} 
-                                                            rateActive={false} 
-                                                            rateNum={0} 
-                                                            link="" 
-                                                            title={i.attribute.nameRu} 
-                                                            description={!isNum ? i.value.tvalueRu : i.value.nvalue} 
-                                                            className="mb-16" 
-                                                        />
-                                            })
-                                        ) : null
-                                    }
-                                    {item ?
-                                    <DescriptionInLine rateActive={true} rateNum={5} id={item.shopInfo.id} link={item.shopInfo.name} title="Продавец" description="" className="mb-16" />
-                                    : null }
-                                </div>
-
-
-                                {/* <div className="d-flex-al-center-space-between mb-24">
+                  {/* <div className="d-flex-al-center-space-between mb-24">
                                     <Title20 title="Отзывы" className=""/>
                                     <Button title="Оставить отзыв" className="btn btn-secondary btn-48" />
                                 </div>
@@ -141,24 +175,23 @@ const ProductInner = (props: any) => {
                                         Изначально были сомнения на счет терракотового цвета, боялась, чтобы оттенок не был с рыжим оттенком. Но цвет оказался очень приятным, теплым и удачно вписался в интерьер. Диван очень комфортный для сидения и для сна. " 
                                     />
                                 </div> */}
-                            </div>
-                            
-                        </div>
-                    </div>
                 </div>
-
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </Layout>
   );
-}
+};
 
 export const getServerSideProps = async (context: any) => {
-    return {
-        props: {
-            item: await (await fetch(url(`/item/${context.query.id}`))).json()
-        }
-    }
-}
+  return {
+    props: {
+      item: await (await fetch(url(`/item/${context.query.id}`))).json(),
+      cat: await (await fetch(url(`/categories-with-count`))).json(),
+    },
+  };
+};
 
 export default observer(ProductInner);

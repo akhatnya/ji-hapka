@@ -1,17 +1,22 @@
 import React from "react";
+import Link from "next/link";
 
 interface BreadcrumbsProps {
-    className: string;
-  }
-const Breadcrumbs  = (props: BreadcrumbsProps) => {
-    const { className } = props;
+  className: string;
+  main: string;
+  link?: string;
+  isMain: boolean;
+  inner?: string;
+}
+const Breadcrumbs = (props: BreadcrumbsProps) => {
+  const { className, main, link, isMain } = props;
   return (
     <div className={`breadcrumbs ${className}`}>
-        {/* <a href="#" className="bc-l">Главная</a>
-        <a href="#" className="bc-l">Еще ссылка</a>
-        <span className="active">Примерить мебель с AR</span> */}
+      <Link href="/">Главная</Link>
+      {link ? <Link href={link}>{main}</Link> : <span>{main}</span>}
+      {!isMain && props?.inner && <span>{props?.inner}</span>}
     </div>
   );
-}
+};
 
 export default Breadcrumbs;

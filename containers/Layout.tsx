@@ -9,7 +9,13 @@ type Props = {
   image?: string;
 };
 
-const Layout = ({ children, title = "Jihaz AR", description, keywords, image = "https://storage.googleapis.com/viled-cdn/img-jihazlogo.png" }: Props) => (
+const Layout = ({
+  children,
+  title = "Jihaz AR",
+  description,
+  keywords,
+  image = "https://storage.googleapis.com/viled-cdn/img-jihazlogo.png",
+}: Props) => (
   <>
     <Head>
       <title>{title}</title>
