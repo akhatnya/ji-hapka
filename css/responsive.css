@@ -385,7 +385,7 @@
         background-size: contain;
     }
     .thumb-image {
-        overflow-x: hidden;
+        overflow-x: visible;
         padding-bottom: 16px;
         flex: 0 0 90%;
     }

@@ -4,9 +4,12 @@ import { ThumbImage } from "../components/CustomComponents";
 import { Title20 } from "./Typography";
 import { API_STORAGE } from "../src/consts";
 import ReactGA from "react-ga";
-import Image from "next/image";
+import { useOnClickOutside } from "usehooks-ts";
+import { useRef } from "react";
+import { useBasketStore } from "../providers/RootStoreProvider";
 
 const ShowImage = (props: any) => {
+  const store = useBasketStore();
   const download = async (objectUrl: any) => {
     await axios({
       url: objectUrl,
@@ -19,11 +22,15 @@ const ShowImage = (props: any) => {
       },
     });
   };
+  const [openImg, setOpenImg]: any = useState("");
+  const ref = useRef(null);
+
+  useOnClickOutside(ref, () => setOpenImg(false));
 
   const [percentage, setPercentage]: any = useState(0);
   const [downloading, setDownloading]: any = useState(null);
 
-  const { backgroundImage, className } = props;
+  const { backgroundImage, className, curImage, setCurImage } = props;
   const [withMobileModal, setWithMobileModal]: any = useState(null);
   const [isAndroid, setIsAndroid]: any = useState(null);
   const [isDesktop, setIsDesktop]: any = useState(null);
@@ -40,7 +47,13 @@ const ShowImage = (props: any) => {
       category: "Tap_closing_themodal",
       action: `Tap_closing_themodal1`,
     });
-    setWithMobileModal(false);
+    store.setCloseMobileModal();
+  };
+
+  const handleClickBgImg = (img: string) => {
+    if (!isDesktop) {
+      setOpenImg(img);
+    }
   };
 
   return (
@@ -48,7 +61,8 @@ const ShowImage = (props: any) => {
       <div className="big-image">
         <div
           className="img"
-          style={{ backgroundImage: `${backgroundImage}` }}
+          style={{ backgroundImage: `url(${API_STORAGE}${backgroundImage})` }}
+          onClick={() => handleClickBgImg(backgroundImage)}
         ></div>
         <div className="action">
           {isQr ? (
@@ -72,7 +86,6 @@ const ShowImage = (props: any) => {
                 if (isDesktop) {
                   setIsQr(true);
                 } else {
-                  console.log(props, "props");
                   !isAndroid
                     ? window.open(
                         API_STORAGE + props.objUrl[0]?.download_link,
@@ -99,8 +112,7 @@ const ShowImage = (props: any) => {
             </button>
           )}
         </div>
-
-        {!isDesktop ? (
+        {!isDesktop && !store.modalClose ? (
           <div className="frst-time-modal">
             <div className="frst-time-modal-inner">
               <Title20
@@ -126,16 +138,24 @@ const ShowImage = (props: any) => {
         )}
       </div>
       <div className="thumb-image">
-        {props.images?.map((img: any, index: any) => {
-          return (
+        {props.images?.map((img: any, index: number) => {
+          return !isDesktop && index === 0 ? null : (
             <ThumbImage
               key={index}
-              activeImage={props.curImage === img ? "active" : ""}
+              activeImage={curImage === img ? "active" : ""}
               thumbImage={`url(${API_STORAGE}${img}`}
+              onClick={() =>
+                isDesktop ? setCurImage(img) : handleClickBgImg(img)
+              }
             />
           );
         })}
       </div>
+      {openImg && (
+        <div className="big-image-full">
+          <img ref={ref} src={API_STORAGE + openImg} alt="bg" />
+        </div>
+      )}
     </div>
   );
 };

@@ -49,7 +49,7 @@ const ProductInner = (props: any) => {
                   curImage={curImage}
                   objUrl={item.object_3d}
                   gltfUrl={item.object_gltf}
-                  backgroundImage={`url(${API_STORAGE}${curImage}`}
+                  backgroundImage={`${curImage}`}
                   className="mb-32"
                 />
               </div>

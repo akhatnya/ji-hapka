@@ -46,6 +46,7 @@ export class BasketStore {
   oldBasket: any = [];
   price: number = 0;
   favorites: Array<any> = [];
+  modalClose: boolean = false;
   isFavOpen: boolean = false;
   isSubmit: boolean = false;
 
@@ -108,6 +109,17 @@ export class BasketStore {
     if (cookie.get("fav")) {
       this.favorites = cookie.get("fav");
     }
+    if (cookie.get("modalClose")) {
+      this.modalClose = cookie.get("modalClose");
+    }
+  }
+
+  setCloseMobileModal() {
+    cookie.set("modalClose", true, {
+      expires: new Date("2030-12-17"),
+      path: "/",
+    });
+    this.loadCookies();
   }
 
   saveFavInCookie() {
