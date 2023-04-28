@@ -884,15 +884,15 @@ p {
 
 .row-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
 }
 .row-header .col-left, .row-header .col-center, .row-header .col-right, .header-menu {
   display: flex;
   align-items: center;
 }
-.row-header .col-center {
-  justify-content: center;
+.row-header .col-left {
+  display: none;
 }
 .row-header .col-right {
   justify-content: flex-end;
@@ -1633,6 +1633,9 @@ p {
     border-radius: 12px;
     background-color: #E6E9ED;
     overflow: hidden;
+}
+.bannerMob {
+  display: 'none';
 }
 .banner .banner-text {
   padding: 100px 85px;

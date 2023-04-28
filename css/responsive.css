@@ -28,6 +28,15 @@
         font-size: 17.7465px;
         line-height: 21px;
     }
+    .row-header {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .row-header .col-left {
+        display: flex;
+    }
+    .row-header .col-center {
+        justify-content: center;
+    }
     .header .header-menu {
         display: none;
     }
@@ -53,12 +62,17 @@
     .breadcrumbs a, .breadcrumbs span {
         font-size: 12px;
     }
+    .cart-basket {
+        position: relative;
+        width: 24px;
+        height: 24px;
+    }
     .cart-basket .qty-basket {
         font-size: 8px;
         right: 0px;
         left: unset;
         top: -6px;
-        line-height: 1;
+        line-height: 120%;
         text-align: right;
         justify-content: flex-end;
         overflow: hidden;
@@ -78,7 +92,12 @@
     }
 
     .banner {
+        display: none;
         border-radius: 16px;
+    }
+    .bannerMob {
+      display: 'block';
+      background: url(/images/banners/banner.png) no-repeat;
     }
     .banner .banner-text {
         padding: 24px 0 24px 24px;

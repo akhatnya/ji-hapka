@@ -78,14 +78,25 @@ export class BasketStore {
     this.isSubmit = !this.isSubmit;
   }
 
+  setModalClose(mclose: boolean) {
+    this.modalClose = mclose;
+  }
+
+  addFav(itemId: any) {
+    this.favorites.push({
+      ...itemId,
+    });
+  }
+
   addFavorite(item: any) {
     let jihazFound = this.favorites.find((i: any) => i.id === item.id);
     if (jihazFound === undefined) {
-      this.favorites.push({
-        ...item,
-      });
+      this.addFav(item);
       this.saveFavInCookie();
-    } else this.deleteFavorite(item.id);
+      this.loadCookies();
+    } else {
+      this.deleteFavorite(item.id);
+    }
   }
 
   deleteFavorite(itemId: any) {
@@ -107,6 +118,7 @@ export class BasketStore {
       this.basket = cookie.get("basket");
     }
     if (cookie.get("fav")) {
+      console.log(cookie.get("fav"), "alo");
       this.favorites = cookie.get("fav");
     }
     if (cookie.get("modalClose")) {
@@ -116,22 +128,24 @@ export class BasketStore {
 
   setCloseMobileModal() {
     cookie.set("modalClose", true, {
-      expires: new Date("2030-12-17"),
+      expires: new Date("2030-12-17T00:00:00"),
       path: "/",
     });
     this.loadCookies();
   }
 
   saveFavInCookie() {
-    cookie.set("fav", this.favorites, {
-      expires: new Date("2030-12-17"),
+    console.log(JSON.parse(JSON.stringify(this.favorites)), "cook");
+    cookie.set("fav", JSON.stringify(this.favorites), {
+      expires: new Date("2030-12-17T00:00:00"),
       path: "/",
     });
+    console.log(cookie.get("fav"));
   }
 
   saveBasketInCookie() {
     cookie.set("basket", this.basket, {
-      expires: new Date("2030-12-17T03:24:00"),
+      expires: new Date("2030-12-17T00:00:00"),
       path: "/",
     });
   }
@@ -181,13 +195,16 @@ export class BasketStore {
 
   addJihaz(jihaz: any) {
     this.saveBasketInCookie();
+    console.log("ADD");
     let jihazFound = this.basket.find((item: any) => item.id === jihaz.id);
     if (jihazFound === undefined) {
+      console.log("FIRST");
       this.addFirstJihaz(jihaz);
     } else {
       for (let i = 0; i < this.basket.length; i++) {
         if (this.basket[i].id === jihaz.id) {
           this.basket[i].quantity = this.basket[i].quantity + 1;
+          console.log("QUAN");
           this.saveBasketInCookie();
           break;
         }
@@ -197,6 +214,14 @@ export class BasketStore {
 
   setBasket(con: boolean = this.isBasketOpen) {
     this.isBasketOpen = !this.isBasketOpen;
+  }
+
+  getFavSize() {
+    let size = 0;
+    for (let i = 0; i < this.favorites.length; i++) {
+      size++;
+    }
+    return size;
   }
 
   getBasketSize() {
