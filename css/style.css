@@ -271,9 +271,10 @@ body {
     padding: 4px 8px;
     position: absolute;
     left: 24px;
-    top: -13px;
+    top: -10px;
     font-weight: 500;
     font-size: 12px;
+    line-height: 12px;
     color: #FFFFFF;
     background: #9AA1B4;
     border-radius: 11px;

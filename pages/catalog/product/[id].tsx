@@ -9,6 +9,11 @@ import { Title20, DescriptionInLine } from "../../../components/Typography";
 import { kzt } from "../../../utils/globalUtils";
 import ReactGA from "react-ga";
 import { API_STORAGE } from "../../../src/consts";
+import { NextPageContext } from "next";
+import {
+  loadCategories,
+  loadItemDetails,
+} from "../../../src/requests/requests";
 
 const ProductInner = (props: any) => {
   const store = useBasketStore();
@@ -44,7 +49,7 @@ const ProductInner = (props: any) => {
               <div className="col-grid-1">
                 <ShowImage
                   device={props.device}
-                  images={item?.image}
+                  images={item.image}
                   setCurImage={setCurImage}
                   curImage={curImage}
                   objUrl={item.object_3d}
@@ -186,10 +191,11 @@ const ProductInner = (props: any) => {
 };
 
 export const getServerSideProps = async (context: any) => {
+  console.log(context, "ctx");
   return {
     props: {
-      item: await (await fetch(url(`/item/${context.query.id}`))).json(),
-      cat: await (await fetch(url(`/categories-with-count`))).json(),
+      item: await loadItemDetails(context.params.id, (r: any) => r.data),
+      cat: await loadCategories((r: any) => r.data),
     },
   };
 };

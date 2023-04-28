@@ -7,21 +7,13 @@ import ReactGA from "react-ga";
 import { useOnClickOutside } from "usehooks-ts";
 import { useRef } from "react";
 import { useBasketStore } from "../providers/RootStoreProvider";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import { download } from "../src/requests/requests";
 
 const ShowImage = (props: any) => {
   const store = useBasketStore();
-  const download = async (objectUrl: any) => {
-    await axios({
-      url: objectUrl,
-      method: "GET",
-      responseType: "blob", // important
-      onDownloadProgress: (progressEvent: any) => {
-        setPercentage(
-          Math.round((progressEvent.loaded * 100) / progressEvent.total)
-        );
-      },
-    });
-  };
+  const router = useRouter();
   const [openImg, setOpenImg]: any = useState("");
   const ref = useRef(null);
 
@@ -35,6 +27,7 @@ const ShowImage = (props: any) => {
   const [isAndroid, setIsAndroid]: any = useState(null);
   const [isDesktop, setIsDesktop]: any = useState(null);
   const [isQr, setIsQr]: any = useState(false);
+  const [isClosed, setIsClosed]: any = useState(false);
 
   useEffect(() => {
     setWithMobileModal(props.device.isMobile());
@@ -43,6 +36,7 @@ const ShowImage = (props: any) => {
   }, []);
 
   const onClose = () => {
+    setIsClosed(true);
     ReactGA.event({
       category: "Tap_closing_themodal",
       action: `Tap_closing_themodal1`,
@@ -53,6 +47,36 @@ const ShowImage = (props: any) => {
   const handleClickBgImg = (img: string) => {
     if (!isDesktop) {
       setOpenImg(img);
+    }
+  };
+
+  const openFile = async (e: any) => {
+    e.preventDefault();
+    ReactGA.event({
+      category: "Tap_try_ontheroom",
+      action: `Tap_try_ontheroom1`,
+    });
+    console.log(props);
+    if (isDesktop) {
+      setIsQr(true);
+    } else {
+      if (!isAndroid) {
+        router.push(API_STORAGE + props.objUrl[0]?.download_link);
+      } else {
+        router.push(
+          `intent://arvr.google.com/scene-viewer/1.0?file=${
+            API_STORAGE + props.gltfUrl[0]?.download_link
+          }#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;`
+        );
+      }
+      if (downloading == null) {
+        download(props.objUrl, (progressEvent: any) => {
+          setPercentage(
+            Math.round((progressEvent.loaded * 100) / progressEvent.total)
+          );
+        });
+        setDownloading(true);
+      }
     }
   };
 
@@ -76,43 +100,22 @@ const ShowImage = (props: any) => {
               </svg>
             </button>
           ) : (
-            <button
+            <a
               id="clickMeAgain"
-              onClick={async (evt: any) => {
-                ReactGA.event({
-                  category: "Tap_try_ontheroom",
-                  action: `Tap_try_ontheroom1`,
-                });
-                if (isDesktop) {
-                  setIsQr(true);
-                } else {
-                  !isAndroid
-                    ? window.open(
-                        API_STORAGE + props.objUrl[0]?.download_link,
-                        "_blank"
-                      )
-                    : window.open(
-                        `intent://arvr.google.com/scene-viewer/1.0?file=${
-                          API_STORAGE + props.gltfUrl[0]?.download_link
-                        }#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;`,
-                        "_blank"
-                      );
-                  if (downloading == null) {
-                    await download(props.objUrl);
-                    setDownloading(true);
-                  }
-                }
-              }}
+              rel="ar"
+              href="#"
+              onClick={openFile}
               className="btn btn-white btn-44"
             >
+              <img />
               <svg height="33" width="33">
                 <use href={`/images/icons/AR.svg#root`}></use>
               </svg>
               Примерить в комнате
-            </button>
+            </a>
           )}
         </div>
-        {!isDesktop && !store.modalClose ? (
+        {!isDesktop && !store.modalClose && !isClosed ? (
           <div className="frst-time-modal">
             <div className="frst-time-modal-inner">
               <Title20
@@ -130,7 +133,7 @@ const ShowImage = (props: any) => {
             <div className="qr-code-inner">
               <Title20 title="Отсканируйте QR" className="" />
               <Title20 title="и примерьте мебель в комнате" className="mb-24" />
-              <img src="/images/qr-code.png" alt="qr" />
+              <Image src="/images/qr-code.png" alt="qr" />
             </div>
           </div>
         ) : (

@@ -2,7 +2,10 @@ import axios from "axios";
 import { url } from "../urls";
 
 export const loadCategories = async (callBack: any) => {
-  return axios.get(url("/categories-with-count")).then(callBack);
+  return axios
+    .get(url("/categories-with-count"))
+    .then(callBack)
+    .catch((err) => console.error(err));
 };
 
 export const loadWith3d = async (callBack: any) => {
@@ -34,7 +37,23 @@ export const loadMenu = async (callback: any) => {
 };
 
 export const loadItemDetails = async (itemId: any, callback: any) => {
-  return axios.get(url(`/item/${itemId}`)).then(callback);
+  return await axios
+    .get(url(`/item/${itemId}`))
+    .then(callback)
+    .catch((err) => {
+      err.statusCode = 500;
+    });
+};
+
+export const download = async (objectUrl: any, onDownloadProgress: any) => {
+  await axios({
+    url: objectUrl,
+    method: "GET",
+    responseType: "blob", // important
+    onDownloadProgress: onDownloadProgress,
+  }).catch((err) => {
+    console.error(err);
+  });
 };
 
 export const sendOrder = async (form: any, callback: any) => {
